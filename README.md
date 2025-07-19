@@ -2,7 +2,7 @@
 | Column              | Type    | Options     |
 | ------------------- | ------- | ----------- |
 | department_id       | integer | null: false |
-| number              | integer | null: false |
+| job_num              | integer | null: false |
 | email               | string  | null: false, unique |
 | encrypted_password  | string  | null: false |
 | first_name          | string  | null: false |
