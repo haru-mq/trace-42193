@@ -21,7 +21,6 @@ has_many :records
 | ------------------- | ----------- | ----------- |
 | car_name            | string      | null: false |
 | launch_date         | date        | -           |
-| calculation         | string      | null: false |
 | user                | references  | null: false, foreign_key: true|
 
 ### Association

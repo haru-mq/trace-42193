@@ -14,7 +14,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_19_045643) do
   create_table "cars", charset: "utf8mb3", force: :cascade do |t|
     t.string "car_name", null: false
     t.date "launch_date"
-    t.string "calculation", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

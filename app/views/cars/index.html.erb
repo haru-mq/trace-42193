@@ -8,9 +8,17 @@
   <li><%= link_to "ログイン", new_user_session_path %></li>
 <% end %>
 
-<%= @cars.each do |car| %>
-  <li><%= car.car_name %></li>
-  <li><%= car.launch_date %></li>
-  <li><%= car.calculation %></li>
-  <li><%= car.user %></li>
+
+<%# Car List %>
+<ul>
+  <% @cars.each do |car| %>
+    <li>車両名：<%= car.car_name %></li>
+    <li>発売日：<%= car.launch_date %></li>
+    <li>登録者：<%= car.user.first_name %><%= car.user.last_name %></li>
+  <% end %>
+</ul>
+
+<%# Car registration %>
+<% if user_signed_in? %>
+  <%= link_to "新規登録", "/cars/new" %>
 <% end %>
