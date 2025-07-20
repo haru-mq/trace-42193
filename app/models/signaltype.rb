@@ -1,4 +1,4 @@
-class Signaltype < ActiveHash::Base
+class SignalType < ActiveHash::Base
   self.data = [
     { id: 1, name: '---' },
     { id: 2, name: 'Input' },
@@ -6,5 +6,5 @@ class Signaltype < ActiveHash::Base
   ]
 
   include ActiveHash::Associations
-  has_many :signals
+  has_many :signalinfos
 end

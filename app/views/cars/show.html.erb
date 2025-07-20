@@ -8,20 +8,31 @@
 
 <%# Calculation register %>
 
-<%= form_with(model: [@car, @calculation], local: true) do |f| %>
+<%= form_with(scope: :calculation_signalinfo, url: car_calculations_path(@car), local: true) do |f| %>
   <div>
-    演算名
+    演算名：
     <%= f.text_area :calculation_name %>
+  </div>
+  <div>
+    信号名：
+    <%= f.text_area :signal_name %>
+  </div>
+  <div>
+    信号の種類：
+    <%= f.collection_select(:signal_type_id, SignalType.all, :id, :name, {})%>
   </div>
   <%= f.submit '登録' %>
 <% end %>
+
 
 <%# Calculation List %>
 
 <% @calculations.each do |calculation| %>
   <li>演算名：<%= calculation.calculation_name %></li>
-  <%# <li>インプット信号：<%= calculation.input.input_name %>
-  <%# <li>アウトプット信号：<%= calculation.output.output_name %>
+  <% calculation.signalinfos.each do |signalinfo| %>
+    <li>信号名：<%= signalinfo.signal_name %></li>
+    <li>信号の種類：<%= signalinfo.signal_type.name %></li>
+  <% end %>
 <% end %>
 
 <%= link_to "影響確認",'#'  %>
