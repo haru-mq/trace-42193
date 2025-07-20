@@ -25,6 +25,7 @@ has_many :records
 
 ### Association
 has_many :records
+has_many :calculations
 belongs_to :user
 
 
@@ -42,7 +43,7 @@ belongs_to :car
 
 
 
-## signals
+## signalInfos
 | Column              | Type        | Options     |
 | ------------------- | ----------- | ----------- |
 | signal_name         | string      | null: false |
