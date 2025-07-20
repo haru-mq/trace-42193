@@ -12,7 +12,7 @@
 <%# Car List %>
 <ul>
   <% @cars.each do |car| %>
-    <li>車両名：<%= car.car_name %></li>
+    <li>車両名：<%= link_to car.car_name, car_path(car) %></li>
     <li>発売日：<%= car.launch_date %></li>
     <li>登録者：<%= car.user.first_name %><%= car.user.last_name %></li>
   <% end %>
