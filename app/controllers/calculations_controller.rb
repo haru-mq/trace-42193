@@ -10,11 +10,10 @@ class CalculationsController < ApplicationController
     end
   end
 
-
   private
 
   def calculation_signalinfo_params
-    params.require(:calculation_signalinfo).permit(:calculation_name, :signal_name, :signal_type_id).merge(car_id: params[:car_id])
+    params.require(:calculation_signalinfo).permit(:calculation_name, :signal_name, :signal_type_id).merge(car_id: current_car_id)
   end
   
 end

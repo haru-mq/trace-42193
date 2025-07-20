@@ -7,15 +7,14 @@
 <%= link_to "車両の削除",'#'  %>
 
 <%# Calculation register %>
-
 <%= form_with(scope: :calculation_signalinfo, url: car_calculations_path(@car), local: true) do |f| %>
   <div>
     演算名：
-    <%= f.text_area :calculation_name %>
+    <%= f.text_field :calculation_name %>
   </div>
   <div>
     信号名：
-    <%= f.text_area :signal_name %>
+    <%= f.text_field :signal_name %>
   </div>
   <div>
     信号の種類：
@@ -26,12 +25,25 @@
 
 
 <%# Calculation List %>
-
 <% @calculations.each do |calculation| %>
   <li>演算名：<%= calculation.calculation_name %></li>
   <% calculation.signalinfos.each do |signalinfo| %>
     <li>信号名：<%= signalinfo.signal_name %></li>
     <li>信号の種類：<%= signalinfo.signal_type.name %></li>
+  <% end %>
+
+
+  <%# Signal register %>
+   <%= form_with(model: Signalinfo.new, url: car_signalinfos_path(@car), local: true) do |f| %>
+    <div>
+      信号名：<%= f.text_field :signal_name %>
+    </div>
+    <div>
+      信号の種類：
+      <%= f.collection_select(:signal_type_id, SignalType.all, :id, :name, {})%>
+    </div>
+    <%= f.hidden_field :calculation_id, value: calculation.id %>
+    <%= f.submit "信号を追加" %>
   <% end %>
 <% end %>
 

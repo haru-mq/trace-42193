@@ -5,5 +5,6 @@ Rails.application.routes.draw do
 
   resources :cars do
     resources :calculations, only: [:create]
+    resources :signalinfos, only: [:create]
   end
 end
