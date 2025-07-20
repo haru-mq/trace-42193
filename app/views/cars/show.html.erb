@@ -3,15 +3,25 @@
 <li>車両名：<%= @car.car_name %></li>
 <li>発売日：<%= @car.launch_date %></li>
 
-<%# <% @calculations.each do |calculation| %>
-  <%# <li>演算名：<%= calculation.name %>
-  <%# <li>インプット信号：<%= calculation.input.input_name %>
-  <%# <li>アウトプット信号：<%= calculation.output.output_name %>
-<%# <% end %> 
-
-<%= link_to "演算の登録",'#' %>
-<%= link_to "影響確認",'#'  %>
-
 <%= link_to "車両情報の編集",'#'  %>
 <%= link_to "車両の削除",'#'  %>
 
+<%# Calculation register %>
+
+<%= form_with(model: [@car, @calculation], local: true) do |f| %>
+  <div>
+    演算名
+    <%= f.text_area :calculation_name %>
+  </div>
+  <%= f.submit '登録' %>
+<% end %>
+
+<%# Calculation List %>
+
+<% @calculations.each do |calculation| %>
+  <li>演算名：<%= calculation.calculation_name %></li>
+  <%# <li>インプット信号：<%= calculation.input.input_name %>
+  <%# <li>アウトプット信号：<%= calculation.output.output_name %>
+<% end %>
+
+<%= link_to "影響確認",'#'  %>
