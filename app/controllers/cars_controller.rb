@@ -19,6 +19,11 @@ class CarsController < ApplicationController
 
   def show
     @car = Car.find(params[:id])
+    @calculations = @car.calculations.includes(:car)
+  end
+
+  def edit
+    @car = Car.find(params[:id])
   end
 
 

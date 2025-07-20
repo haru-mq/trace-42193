@@ -3,5 +3,8 @@ Rails.application.routes.draw do
 
   root "cars#index"
 
-  resources :cars, only: [:index, :new, :create, :show]
+  resources :cars do
+    resources :calculations, only: [:create]
+    resources :signalinfos, only: [:create]
+  end
 end

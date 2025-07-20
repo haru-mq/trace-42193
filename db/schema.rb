@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_19_045643) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_20_012529) do
+  create_table "calculations", charset: "utf8mb3", force: :cascade do |t|
+    t.string "calculation_name", null: false
+    t.bigint "car_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_calculations_on_car_id"
+  end
+
   create_table "cars", charset: "utf8mb3", force: :cascade do |t|
     t.string "car_name", null: false
     t.date "launch_date"
@@ -18,6 +26,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_19_045643) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_cars_on_user_id"
+  end
+
+  create_table "signalinfos", charset: "utf8mb3", force: :cascade do |t|
+    t.string "signal_name", null: false
+    t.integer "signal_type_id", null: false
+    t.bigint "calculation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calculation_id"], name: "index_signalinfos_on_calculation_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -38,5 +55,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_19_045643) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "calculations", "cars"
   add_foreign_key "cars", "users"
+  add_foreign_key "signalinfos", "calculations"
 end
