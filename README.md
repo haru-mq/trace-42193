@@ -2,7 +2,7 @@
 | Column              | Type    | Options     |
 | ------------------- | ------- | ----------- |
 | department_id       | integer | null: false |
-| job_num              | integer | null: false |
+| job_num             | integer | null: false |
 | email               | string  | null: false, unique |
 | encrypted_password  | string  | null: false |
 | first_name          | string  | null: false |
@@ -20,8 +20,7 @@ has_many :records
 | Column              | Type        | Options     |
 | ------------------- | ----------- | ----------- |
 | car_name            | string      | null: false |
-| launch_date         | date        | null: false |
-| calculation         | string      | null: false |
+| launch_date         | date        | -           |
 | user                | references  | null: false, foreign_key: true|
 
 ### Association
