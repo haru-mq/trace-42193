@@ -10,6 +10,11 @@ class CalculationsController < ApplicationController
     end
   end
 
+  def trace_signals
+    @calculation = Calculation.find(params[:id])
+    @trace_signals = SignalTraceService.new(@calculation.id).call
+  end
+
   private
 
   def calculation_signalinfo_params
