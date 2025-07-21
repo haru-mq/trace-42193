@@ -3,7 +3,7 @@
 <li>車両名：<%= @car.car_name %></li>
 <li>発売日：<%= @car.launch_date %></li>
 
-<%= link_to "車両情報の編集",'#'  %>
+<%= link_to "車両情報の編集", edit_car_path(@car)  %>
 <%= link_to "車両の削除",'#'  %>
 
 <%# Calculation register %>

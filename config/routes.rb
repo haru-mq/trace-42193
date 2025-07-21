@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root "cars#index"
 
-  resources :cars, only: [:index, :new, :create, :show, :edit] do
+  resources :cars, only: [:index, :new, :create, :show, :edit, :update] do
     resources :calculations, only: [:create, :show] do
       member do
         get :trace_signals
