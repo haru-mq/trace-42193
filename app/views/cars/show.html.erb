@@ -34,7 +34,7 @@
 
 
   <%# Signal register %>
-   <%= form_with(model: Signalinfo.new, url: car_signalinfos_path(@car), local: true) do |f| %>
+  <%= form_with(model: Signalinfo.new, url: car_signalinfos_path(@car), local: true) do |f| %>
     <div>
       信号名：<%= f.text_field :signal_name %>
     </div>
@@ -45,6 +45,10 @@
     <%= f.hidden_field :calculation_id, value: calculation.id %>
     <%= f.submit "信号を追加" %>
   <% end %>
+
+  <%# Signal trace %>
+  <%= link_to "信号の追跡", trace_signals_car_calculation_path(car_id: @car, id: calculation.id) %>
+
 <% end %>
 
 <%= link_to "影響確認",'#'  %>
