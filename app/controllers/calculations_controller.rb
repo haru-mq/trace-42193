@@ -1,12 +1,12 @@
 class CalculationsController < ApplicationController
 
   def create
-    @calculation_signalinfo = CalculationSignalinfo.new(calculation_signalinfo_params)
-    if @calculation_signalinfo.valid?
-      @calculation_signalinfo.save
-      redirect_to "/car/show/#{@calculation_signalinfo.car_id}"
+    @calculation = Calculation.new(calculation_params)
+    if @calculation.valid?
+      @calculation.save
+      redirect_to "/car/show/#{@calculation.car_id}"
     else
-      redirect_to "/car/show/#{@calculation_signalinfo.car_id}", status: :unprocessable_entity
+      redirect_to "/car/show/#{@calculation.car_id}", status: :unprocessable_entity
     end
   end
 
@@ -30,10 +30,6 @@ class CalculationsController < ApplicationController
   end
 
   private
-
-  def calculation_signalinfo_params
-    params.require(:calculation_signalinfo).permit(:calculation_name, :signal_name, :signal_type_id).merge(car_id: current_car_id)
-  end
 
   def calculation_params
     params.require(:calculation).permit(:calculation_name).merge(car_id: params[:car_id])
