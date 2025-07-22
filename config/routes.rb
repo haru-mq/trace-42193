@@ -8,8 +8,8 @@ Rails.application.routes.draw do
       member do
         get :trace_signals
       end
+      resources :signalinfos, only: [:create, :edit, :update]
     end
 
-    resources :signalinfos, only: [:create, :edit, :update]
   end
 end

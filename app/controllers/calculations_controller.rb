@@ -4,9 +4,9 @@ class CalculationsController < ApplicationController
     @calculation = Calculation.new(calculation_params)
     if @calculation.valid?
       @calculation.save
-      redirect_to "/car/show/#{@calculation.car_id}"
+      redirect_to car_path(@calculation.car_id)
     else
-      redirect_to "/car/show/#{@calculation.car_id}", status: :unprocessable_entity
+      redirect_to car_path(@calculation.car_id), status: :unprocessable_entity
     end
   end
 

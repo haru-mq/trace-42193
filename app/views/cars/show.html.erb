@@ -18,17 +18,22 @@
 
 <%# Calculation List %>
 <% @calculations.each do |calculation| %>
-  <li>演算名：<%= calculation.calculation_name %></li>
-  <% calculation.signalinfos.each do |signalinfo| %>
-    <li>信号名：<%= signalinfo.signal_name %></li>
-    <li>信号の種類：<%= signalinfo.signal_type.name %></li>
-  <% end %>
+  <div class="calculation">
+    <li>演算名：<%= calculation.calculation_name %></li>
+    <%= link_to "編集", edit_car_calculation_path(car_id: @car, id: calculation.id)%>
+  </div>
+  <div calss="signalinfo">
+    <% calculation.signalinfos.each do |signalinfo| %>
+      <li>信号名：<%= signalinfo.signal_name %></li>
+      <li>信号の種類：<%= signalinfo.signal_type.name %></li>
+      <%= link_to "編集", edit_car_calculation_signalinfo_path(car_id: @car, calculation_id: calculation.id, id: signalinfo.id)%>
+    <% end %>
+  </div>
 
-  <%= link_to "編集", edit_car_calculation_path(car_id: @car, id: calculation.id)%>
 
 
   <%# Signal register %>
-  <%= form_with(model: Signalinfo.new, url: car_signalinfos_path(@car), local: true) do |f| %>
+  <%= form_with(model: Signalinfo.new, url: car_calculation_signalinfos_path(car_id: @car, calculation_id: calculation.id), local: true) do |f| %>
     <div>
       信号名：<%= f.text_field :signal_name %>
     </div>
