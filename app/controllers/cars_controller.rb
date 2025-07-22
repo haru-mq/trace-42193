@@ -19,6 +19,7 @@ class CarsController < ApplicationController
 
   def show
     @car = Car.find(params[:id])
+    @calculation = Calculation.new(car_id: @car.id)
     @calculations = @car.calculations.includes(:car)
   end
 
@@ -26,6 +27,20 @@ class CarsController < ApplicationController
     @car = Car.find(params[:id])
   end
 
+  def update
+    @car = Car.find(params[:id])
+    if @car.update(car_params)
+      redirect_to car_path(@car)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @car = Car.find(params[:id])
+    @car.destroy
+    redirect_to '/'
+  end
 
   private
 

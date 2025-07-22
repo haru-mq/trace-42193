@@ -1,0 +1,8 @@
+<%# Calculation edit %>
+<%= form_with(model: [@car, @calculation], local: true) do |f| %>
+  <div>
+    演算名：
+    <%= f.text_field :calculation_name %>
+  </div>
+  <%= f.submit '登録' %>
+<% end %>
