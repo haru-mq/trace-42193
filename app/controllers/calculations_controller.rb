@@ -24,6 +24,12 @@ class CalculationsController < ApplicationController
     end
   end
 
+  def destroy
+    @calculation = Calculation.find(params[:id])
+    @calculation.destroy
+    redirect_to car_path(@calculation.car_id)
+  end
+
   def trace_signals
     @calculation = Calculation.find(params[:id])
     @trace_signals = SignalTraceService.new(@calculation.id).call

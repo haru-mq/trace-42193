@@ -24,6 +24,12 @@ class SignalinfosController < ApplicationController
     end
   end
 
+  def destroy
+    @signalinfo = Signalinfo.find(params[:id])
+    @signalinfo.destroy
+    redirect_to car_path(@signalinfo.calculation.car_id)
+  end
+
   private
 
   def signalinfo_params
