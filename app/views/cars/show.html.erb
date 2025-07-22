@@ -32,6 +32,7 @@
     <li>信号の種類：<%= signalinfo.signal_type.name %></li>
   <% end %>
 
+  <%= link_to "編集", edit_car_calculation_path(car_id: @car, id: calculation.id)%>
 
   <%# Signal register %>
   <%= form_with(model: Signalinfo.new, url: car_signalinfos_path(@car), local: true) do |f| %>
