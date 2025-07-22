@@ -12,7 +12,7 @@
 
 ### Association
 has_many :cars
-has_many :records
+has_paper_trail
 
 
 
@@ -24,9 +24,9 @@ has_many :records
 | user                | references  | null: false, foreign_key: true|
 
 ### Association
-has_many :records
-has_many :calculations
 belongs_to :user
+has_many :calculations
+has_paper_trail
 
 
 
@@ -37,9 +37,9 @@ belongs_to :user
 | car                 | references  | null: false, foreign_key: true |
 
 ### Association
-has_many :signals
-has_many :records
 belongs_to :car
+has_many :signals
+has_paper_trail
 
 
 
@@ -51,24 +51,17 @@ belongs_to :car
 | calculation         | references  | null: false, foreign_key: true |
 
 ### Association
-has_many :records
 belongs_to :calculation
+has_paper_trail
 
 
 
-## records
+## paper_trails
 
 | Column              | Type        | Options     |
 | ------------------- | ----------- | ----------- |
-| record              | string      | null: false |
-| change_reason       | string      | -           |
+| reason              | string      | -           |
 | user                | references  | null: false, foreign_key: true |
 | car                 | references  | null: false, foreign_key: true |
 | calculation         | references  | null: false, foreign_key: true |
 | signal              | references  | null: false, foreign_key: true |
-
-### Association
-belongs_to :user
-belongs_to :car
-belongs_to :calculation
-belongs_to :signal

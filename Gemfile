@@ -79,3 +79,5 @@ end
 
 gem 'devise'
 gem 'active_hash'
+
+gem 'paper_trail'

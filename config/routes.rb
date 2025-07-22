@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   root "cars#index"
 
   resources :cars do
+    member do
+      get :history
+    end
     resources :calculations, only: [:create, :edit, :update, :destroy] do
       member do
         get :trace_signals
