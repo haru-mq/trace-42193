@@ -6,7 +6,10 @@ class CalculationsController < ApplicationController
       @calculation.save
       redirect_to car_path(@calculation.car_id)
     else
-      redirect_to car_path(@calculation.car_id), status: :unprocessable_entity
+      @car = Car.find(params[:car_id])
+      @calculations = @car.calculations.includes(:car)
+      @signalinfo = Signalinfo.new
+      render 'cars/show', status: :unprocessable_entity
     end
   end
 

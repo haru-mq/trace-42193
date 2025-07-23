@@ -10,6 +10,9 @@
 
 <%# Calculation register %>
 <%= form_with model: [@car, @calculation], local: true do |f| %>
+
+  <%= render 'shared/error_messages', model: f.object %>
+
   <div>
     演算名：
     <%= f.text_field :calculation_name %>
@@ -17,6 +20,7 @@
   <%= f.submit '登録' %>
 <% end %>
 
+<%= render 'shared/error_messages', model: @signalinfo %>
 
 <%# Calculation List %>
 <% @calculations.each do |calculation| %>
@@ -36,7 +40,9 @@
 
 
   <%# Signal register %>
-  <%= form_with(model: Signalinfo.new, url: car_calculation_signalinfos_path(car_id: @car, calculation_id: calculation.id), local: true) do |f| %>
+  <%= form_with(model: @signalinfo, url: car_calculation_signalinfos_path(car_id: @car, calculation_id: calculation.id), local: true) do |f| %>
+
+
     <div>
       信号名：<%= f.text_field :signal_name %>
     </div>
