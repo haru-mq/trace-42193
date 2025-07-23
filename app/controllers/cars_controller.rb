@@ -21,6 +21,7 @@ class CarsController < ApplicationController
     @car = Car.find(params[:id])
     @calculation = Calculation.new(car_id: @car.id)
     @calculations = @car.calculations.includes(:car)
+    @signalinfo = Signalinfo.new
   end
 
   def edit

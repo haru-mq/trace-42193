@@ -6,6 +6,9 @@ class Car < ApplicationRecord
     car_id: :id
   }
 
-  validates :car_name, :user, presence: true
+  validates :car_name, presence: true,
+  format: { with: /\A[a-zA-Z0-9]+\z/, message: "must contain only letters and numbers"}
+
+  validates :user, presence: true
   
 end
