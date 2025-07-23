@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :department
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

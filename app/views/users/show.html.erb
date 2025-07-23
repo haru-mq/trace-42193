@@ -1,0 +1,13 @@
+<h2>プロフィール</h2>
+
+<ul>
+    <li>部署名：<%= @user.department.name %></li>
+    <li>職番：<%= @user.job_num %></li>
+    <li>Email：<%= @user.email %></li>
+    <li>苗字：<%= @user.last_name %></li>
+    <li>名前：<%= @user.first_name %></li>
+    <li>苗字カナ：<%= @user.last_name_kana %></li>
+    <li>名前カナ：<%= @user.first_name_kana %></li>
+</ul>
+
+<%= link_to 'Return', '/cars' %>

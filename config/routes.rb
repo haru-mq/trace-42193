@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root "cars#index"
 
+  resources :users, only: :show
+
   resources :cars do
     member do
       get :history
