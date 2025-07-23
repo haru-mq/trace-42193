@@ -9,7 +9,7 @@ class CreateVersions < ActiveRecord::Migration[7.1]
   TEXT_BYTES = 1_073_741_823
 
   def change
-    create_table :versions, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci" do |t|
+    create_table :versions, options: do |t|
       # Consider using bigint type for performance if you are going to store only numeric ids.
       # t.bigint   :whodunnit
       t.string   :whodunnit
