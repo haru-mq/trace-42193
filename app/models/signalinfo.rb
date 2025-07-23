@@ -3,9 +3,19 @@ class Signalinfo < ApplicationRecord
 
   belongs_to :calculation
   belongs_to_active_hash :signal_type
-
+  has_paper_trail on: [:create, :update, :destroy], meta: {
+    car_id: :car_id_from_association,
+    calculation_id: :calculation_id,
+    signal_name: :signal_name,
+    signal_type_id: :signal_type_id
+  }
+  
   validates :signal_name, :signal_type_id, presence: true
 
   validates :signal_type_id, numericality: { other_than: 1, message: "must be other than 1" }
+
+  def car_id_from_association
+    calculation.car_id
+  end
 
 end

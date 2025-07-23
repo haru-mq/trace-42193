@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_20_012529) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_22_104303) do
   create_table "calculations", charset: "utf8mb3", force: :cascade do |t|
     t.string "calculation_name", null: false
     t.bigint "car_id", null: false
@@ -53,6 +53,21 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_20_012529) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "versions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "whodunnit"
+    t.string "reason"
+    t.datetime "created_at"
+    t.bigint "item_id", null: false
+    t.string "item_type", limit: 191, null: false
+    t.string "event", null: false
+    t.integer "car_id"
+    t.integer "calculation_id"
+    t.string "signal_name"
+    t.integer "signal_type_id"
+    t.text "object", size: :long
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
   add_foreign_key "calculations", "cars"

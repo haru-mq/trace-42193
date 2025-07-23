@@ -1,0 +1,25 @@
+<h2>この車両に関する変更履歴</h2>
+
+<% if @history.any? %>
+  <ul>
+    <% @history.each do |h| %>
+      <li>日時：<%= h[:created_at] %></li>
+      <li>変更者：
+        <%= h[:user].first_name %><%= h[:user].last_name %></li>
+      <li>変更：<%= h[:event] %></li>
+      <li>変更箇所：<%= h[:model] %></li>
+
+      <li>車両：<%= h[:car].car_name %></li>
+      <% if h[:calculation] %>
+        <li>演算：<%= h[:calculation].calculation_name %></li>
+      <% end %>
+      <% if h[:signal_name] %>
+        <li>信号：<%= h[:signal_name] %></li>
+        <li>信号の種類：<%= h[:signal_type_id].name %></li>
+      <% end %>
+      <li>変更理由：<%= h[:reason] %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= link_to 'Return', car_path{@car} %>
