@@ -4,7 +4,9 @@
 <li>発売日：<%= @car.launch_date %></li>
 
 <%= link_to "車両情報の編集", edit_car_path(@car)  %>
-<%= link_to "車両の削除","/cars/#{@car.id}", data: {turbo_method: :delete}  %>
+<%= link_to "車両の削除", "/cars/#{@car.id}", data: {turbo_method: :delete}  %>
+
+<%= link_to "変更履歴", history_car_path(@car) %>
 
 <%# Calculation register %>
 <%= form_with model: [@car, @calculation], local: true do |f| %>
@@ -31,7 +33,6 @@
       <%= link_to "削除", "/cars/#{@car.id}/calculations/#{calculation.id}/signalinfos/#{signalinfo.id}", data: {turbo_method: :delete} %>
     <% end %>
   </div>
-
 
 
   <%# Signal register %>
