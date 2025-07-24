@@ -1,22 +1,26 @@
 <h2><%= @calculation.calculation_name %>の追跡結果</h2>
 
 <% if @trace_signals.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>信号名</th>
-        <th>信号の種類</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @trace_signals.each do |signal| %>
+  <% if @loop_limit_exceeded %>
+    <p class="warning"><%= "Signal trace exceeded limit from calculation from #{@calculation.calculation_name}"%></p>
+  <% else %>
+    <table>
+      <thead>
         <tr>
-          <td><%= signal[:signal_name] %></td>
-          <td><%= signal[:source_calculation] %></td>
+          <th>信号名</th>
+          <th>信号の種類</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @trace_signals.each do |signal| %>
+          <tr>
+            <td><%= signal[:signal_name] %></td>
+            <td><%= signal[:source_calculation] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>
 
 <%= link_to 'Return', car_path(@calculation.car_id) %>
