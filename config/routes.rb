@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root "cars#index"
 
-  resources :users, only: :show
+  resources :users, only: [:show, :edit, :update]
 
   resources :cars do
     member do
