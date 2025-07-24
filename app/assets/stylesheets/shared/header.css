@@ -1,0 +1,40 @@
+/* ---------- base layout ---------- */
+body{
+  background:#f4f6f8;
+  color:#2d3436;
+  font-family:"Helvetica Neue", Arial, sans-serif;
+  margin:0;
+}
+
+/* center whole app in a narrow column */
+.container{
+  width:480px;
+  margin:0 auto;
+  padding:0 1rem;
+}
+
+/* ---------- header ---------- */
+.header{
+  background:#3867d6;
+  color:#fff;
+  box-shadow:0 2px 4px rgba(0,0,0,.05);
+}
+.header__bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  max-width:480px;
+  margin:0 auto;
+  padding:.8rem 1rem;
+}
+.header a{color:#fff;text-decoration:none}
+.header ul{display:flex;gap:.8rem}
+.header li{font-size:.9rem}
+
+/* ---------- grid helpers ---------- */
+.row{display:flex;flex-wrap:wrap}
+.grid-6{flex:0 0 50%}
+
+/* ---------- links ---------- */
+a{color:#3867d6;text-decoration:none}
+a:hover{text-decoration:underline}

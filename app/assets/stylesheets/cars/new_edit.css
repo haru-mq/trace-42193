@@ -1,0 +1,69 @@
+/* ===== cars/new & cars/edit ===== */
+.car-form-wrap{
+  width:480px;
+  margin:0 auto;
+  padding:1rem 0;
+}
+
+.car-form-title{
+  font-size:1.4rem;
+  margin-bottom:1rem;
+}
+
+.car-form{
+  margin:1rem 0;
+}
+
+.car-form .error-messages{
+  margin-bottom:.8rem;
+}
+
+.car-form__group{
+  margin-bottom:.8rem;
+}
+
+.car-form__label{
+  display:block;
+  font-size:.85rem;
+  margin-bottom:.25rem;
+}
+
+.car-form__input{
+  width:100%;
+  padding:.45rem;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:.9rem;
+  resize:vertical;
+}
+
+/* date select group */
+.input-birth-wrap{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.25rem .4rem;
+  align-items:center;
+  margin:.8rem 0;
+}
+.select-birth{
+  padding:.35rem;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:.9rem;
+}
+
+/* submit */
+.car-form__submit{
+  display:block;
+  width:100%;
+  padding:.55rem;
+  background:#3867d6;
+  color:#fff;
+  border:0;
+  border-radius:6px;
+  font-size:.95rem;
+  cursor:pointer;
+}
+.car-form__submit:hover{
+  opacity:.9;
+}

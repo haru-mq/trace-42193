@@ -1,17 +1,6 @@
-<h1>車両一覧</h1>
+<h2 class="car-index__title">車両一覧</h2>
 
-<% if user_signed_in? %>
-  <li>Hello! <%= link_to current_user.first_name, "#" %>!</li>
-  <li><%= link_to "マイページ", user_path(current_user) %></li>
-  <li><%= link_to "ログアウト", destroy_user_session_path, data: {turbo_method: :delete} %></li>
-<% else %>
-  <li><%= link_to "新規登録", new_user_registration_path %></li>
-  <li><%= link_to "ログイン", new_user_session_path %></li>
-<% end %>
-
-
-<%# Car List %>
-<ul>
+<ul class="car-list">
   <% @cars.each do |car| %>
     <li>車両名：<%= link_to car.car_name, car_path(car) %></li>
     <li>発売日：<%= car.launch_date %></li>
@@ -19,7 +8,6 @@
   <% end %>
 </ul>
 
-<%# Car registration %>
 <% if user_signed_in? %>
-  <%= link_to "新規登録", "/cars/new" %>
+  <%= link_to "新規登録", new_car_path, class:"car-index__new" %>
 <% end %>
