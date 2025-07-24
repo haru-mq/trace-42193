@@ -1,16 +1,14 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:show, :edit, :update]
+  before_action :set_user
 
   def show
-    @user = User.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
-
     # Confirm Password Update
     if user_params[:password].present? || user_params[:password_confirmation].present?
       if user_params[:password] != user_params[:password_confirmation]
@@ -37,6 +35,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:job_num, :first_name, :last_name, :first_name_kana, :last_name_kana, :department_id, :email, :password, :password_confirmation, :current_password)

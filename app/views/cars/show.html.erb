@@ -3,26 +3,33 @@
 <li>車両名：<%= @car.car_name %></li>
 <li>発売日：<%= @car.launch_date %></li>
 
-<%= link_to "車両情報の編集", edit_car_path(@car)  %>
-<%= link_to "車両の削除", "/cars/#{@car.id}", data: {turbo_method: :delete}  %>
+<% if user_signed_in? %>
+  <%= link_to "車両情報の編集", edit_car_path(@car)  %>
+  <%= link_to "車両の削除", "/cars/#{@car.id}", data: {turbo_method: :delete}  %>
 
-<%= link_to "変更履歴", history_car_path(@car) %>
-
-<%# Calculation register %>
-<%= form_with model: [@car, @calculation], local: true do |f| %>
-
-  <%= render 'shared/error_messages', model: f.object %>
-
-  <div>
-    演算名：
-    <%= f.text_field :calculation_name %>
-  </div>
-  <%= f.submit '登録' %>
+  <%= link_to "変更履歴", history_car_path(@car) %>
 <% end %>
 
-<%= render 'shared/error_messages', model: @signalinfo %>
+
+
+<%# Calculation register %>
+<% if user_signed_in? %>
+  <%= form_with model: [@car, @calculation], local: true do |f| %>
+
+    <%= render 'shared/error_messages', model: f.object %>
+
+    <div>
+      演算名：
+      <%= f.text_field :calculation_name %>
+    </div>
+    <%= f.submit '登録' %>
+  <% end %>
+<% end %>
+
 
 <%# Calculation List %>
+<%= render 'shared/error_messages', model: @signalinfo %>
+
 <% @calculations.each do |calculation| %>
   <div class="calculation">
     <li>演算名：<%= calculation.calculation_name %></li>
@@ -33,30 +40,32 @@
     <% calculation.signalinfos.each do |signalinfo| %>
       <li>信号名：<%= signalinfo.signal_name %></li>
       <li>信号の種類：<%= signalinfo.signal_type.name %></li>
-      <%= link_to "編集", edit_car_calculation_signalinfo_path(car_id: @car, calculation_id: calculation.id, id: signalinfo.id)%>
-      <%= link_to "削除", "/cars/#{@car.id}/calculations/#{calculation.id}/signalinfos/#{signalinfo.id}", data: {turbo_method: :delete} %>
+
+      <% if user_signed_in? %>
+        <%= link_to "編集", edit_car_calculation_signalinfo_path(car_id: @car, calculation_id: calculation.id, id: signalinfo.id)%>
+        <%= link_to "削除", "/cars/#{@car.id}/calculations/#{calculation.id}/signalinfos/#{signalinfo.id}", data: {turbo_method: :delete} %>
+      <% end %>
     <% end %>
   </div>
 
-
   <%# Signal register %>
-  <%= form_with(model: @signalinfo, url: car_calculation_signalinfos_path(car_id: @car, calculation_id: calculation.id), local: true) do |f| %>
-
-
-    <div>
-      信号名：<%= f.text_field :signal_name %>
-    </div>
-    <div>
-      信号の種類：
-      <%= f.collection_select(:signal_type_id, SignalType.all, :id, :name, {})%>
-    </div>
-    <%= f.hidden_field :calculation_id, value: calculation.id %>
-    <%= f.submit "信号を追加" %>
-  <% end %>
+  <% if user_signed_in? %>
+    <%= form_with(model: @signalinfo, url: car_calculation_signalinfos_path(car_id: @car, calculation_id: calculation.id), local: true) do |f| %>
+      <div>
+        信号名：<%= f.text_field :signal_name %>
+      </div>
+      <div>
+        信号の種類：
+        <%= f.collection_select(:signal_type_id, SignalType.all, :id, :name, {})%>
+      </div>
+      <%= f.hidden_field :calculation_id, value: calculation.id %>
+      <%= f.submit "信号を追加" %>
+    <% end %>
+  
 
   <%# Signal trace %>
-  <%= link_to "信号の追跡", trace_signals_car_calculation_path(car_id: @car, id: calculation.id) %>
-
+    <%= link_to "信号の追跡", trace_signals_car_calculation_path(car_id: @car, id: calculation.id) %>
+  <% end %>
 <% end %>
 
 <%= link_to "影響確認",'#'  %>
