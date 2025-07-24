@@ -1,4 +1,7 @@
 class CalculationsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
+  before_action :set_calculation, only: [:edit, :update, :destroy, :trace_signals]
+
 
   def create
     @calculation = Calculation.new(calculation_params)
@@ -15,11 +18,9 @@ class CalculationsController < ApplicationController
 
   def edit
     @car = Car.find(params[:car_id])
-    @calculation = Calculation.find(params[:id])
   end
 
   def update
-    @calculation = Calculation.find(params[:id])
     if @calculation.update(calculation_params)
       redirect_to car_path(@calculation.car)
     else
@@ -28,17 +29,19 @@ class CalculationsController < ApplicationController
   end
 
   def destroy
-    @calculation = Calculation.find(params[:id])
     @calculation.destroy
     redirect_to car_path(@calculation.car_id)
   end
 
   def trace_signals
-    @calculation = Calculation.find(params[:id])
     @trace_signals = SignalTraceService.new(@calculation.id).call
   end
 
   private
+
+  def set_calculation
+    @calculation = Calculation.find(params[:id])
+  end
 
   def calculation_params
     params.require(:calculation).permit(:calculation_name).merge(car_id: params[:car_id])

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :department
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -23,7 +24,10 @@ class User < ApplicationRecord
     validates :last_name_kana
   end
 
-  validates :password, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+\z/, message: "must include at least one lowercase letter, one uppercase letter, and one digit"}
+  validates :password, format: {
+    with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+\z/,
+    message: "must include at least one lowercase letter, one uppercase letter, and one digit"
+  }, on: :create
 
   validates :department_id, numericality: { other_than: 1, message: "must be other than 1" }
 end
