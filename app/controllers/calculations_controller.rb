@@ -34,7 +34,9 @@ class CalculationsController < ApplicationController
   end
 
   def trace_signals
-    @trace_signals = SignalTraceService.new(@calculation.id).call
+    result = SignalTraceService.new(@calculation.id).call
+    @trace_signals = result[:results]
+    @loop_limit_exceeded = result[:loop_limit_exceeded]
   end
 
   private

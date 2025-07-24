@@ -37,8 +37,8 @@
 
     <%# Signal trace -------------------------------------------------------%>
       <p class="calculation-card__trace">
-        <%= link_to "信号の追跡", "#", class: "btn btn--secondary btn--small" %>
-        <%# <%= link_to "信号の追跡", trace_signals_car_calculation_path(@car, calculation), class: "btn btn--secondary btn--small" %>
+        <%# <%= link_to "信号の追跡", "#", class: "btn btn--secondary btn--small" %>
+        <%= link_to "信号の追跡", trace_signals_car_calculation_path(@car, calculation), class: "btn btn--secondary btn--small" %>
       </p>
 
       <% if user_signed_in? %>
