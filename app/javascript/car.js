@@ -1,24 +1,25 @@
 window.addEventListener('load', function(){
 
-// edit form ------------------------------------------------------
-  const editCar = this.document.getElementById('edit-car');
-  const editCarForm = this.document.getElementById('edit-car-form');
+// new & edit form ------------------------------------------------------
+  const newEditCar = this.document.getElementById('new-edit-car');
+  const CarForm = this.document.getElementById('car-form');
+  const errorMessages = CarForm.querySelector('.error-messages');
   
-  editCar.addEventListener('click', function(){
-    editCarForm.setAttribute("style", "display: block;");
+  newEditCar.addEventListener('click', function(){
+    CarForm.setAttribute("style", "display: block;");
   })
 
-  const errorShow = editCarForm.dataset.errorMessages == "true";
+  const errorShow = CarForm.dataset.errorMessages == "true";
   if (errorShow){
-    editCarForm.setAttribute("style", "display: block;");
+    CarForm.setAttribute("style", "display: block;");
   }
 
   this.addEventListener('click', function(e) {
-    if (e.target === editCarForm) {
-      editCarForm.setAttribute("style", "display: none;");
+    if (e.target === CarForm) {
+      CarForm.setAttribute("style", "display: none;");
+      if (errorMessages) {
+        errorMessages.innerHTML = "";
+      }
     }
   });
-
-
-  
 })

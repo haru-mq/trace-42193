@@ -7,8 +7,7 @@
 
 <% if user_signed_in? %>
   <div class="car-page__actions">
-    <a class="btn btn--primary", id="edit-car">車両情報の編集</a>
-    <%# <%= link_to "車両情報の編集", edit_car_path(@car), class: "btn btn--primary", id: "edit-car" %>
+    <a class="btn btn--primary", id="new-edit-car">車両情報の編集</a>
     <%= link_to "車両の削除", car_path(@car), data: { turbo_method: :delete }, class: "btn btn--danger" %>
     <%= link_to "変更履歴", history_car_path(@car), class: "btn btn--secondary" %>
   </div>
@@ -94,10 +93,10 @@
 
 <%# PopUp============================================================================= %>
 
-<%# Edit register ------------------------------------------------------%>
-<div class="modal" id= "edit-car-form" data-error-messages="<%= @car.errors.any? %>">
+<%# Edit Form ------------------------------------------------------%>
+<div class="modal" id= "car-form" data-error-messages="<%= @car.errors.any? %>">
   <div class="modal-content">
-    <%= form_with model: @car, local: true, data: { turbo: false} do |f| %>
+    <%= form_with model: @car, local: true, data: { turbo: false } do |f| %>
 
         <div class="error-messages">
           <%= render 'shared/error_messages', model: f.object %>
