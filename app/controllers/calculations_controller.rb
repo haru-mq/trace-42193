@@ -5,14 +5,15 @@ class CalculationsController < ApplicationController
 
   def create
     @calculation = Calculation.new(calculation_params)
-    if @calculation.valid?
-      @calculation.save
+    if @calculation.save
       redirect_to car_path(@calculation.car_id)
     else
       @car = Car.find(params[:car_id])
       @calculations = @car.calculations.includes(:car)
       @signalinfo = Signalinfo.new
-      render 'cars/show', status: :unprocessable_entity
+      flash[:errors] = @calculation.errors.full_messages
+      flash[:input] = params[:calculation]
+      redirect_to car_path(@car)
     end
   end
 

@@ -16,7 +16,7 @@ class CarsController < ApplicationController
       redirect_to '/'
     else
       @cars = Car.all
-      render :index
+      render :index, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +33,7 @@ class CarsController < ApplicationController
       @calculation = Calculation.new(car_id: @car.id)
       @calculations = @car.calculations.includes(:car)
       @signalinfo = Signalinfo.new
-      render :show
+      render :show, status: :unprocessable_entity
     end
   end
 
