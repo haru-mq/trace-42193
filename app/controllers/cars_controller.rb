@@ -25,14 +25,14 @@ class CarsController < ApplicationController
     @signalinfo = Signalinfo.new
   end
 
-  def edit
-  end
-
   def update
     if @car.update(car_params)
       redirect_to car_path(@car)
     else
-      render :edit, status: :unprocessable_entity
+      @calculation = Calculation.new(car_id: @car.id)
+      @calculations = @car.calculations.includes(:car)
+      @signalinfo = Signalinfo.new
+      render :show
     end
   end
 

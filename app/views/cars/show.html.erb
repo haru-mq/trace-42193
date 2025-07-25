@@ -1,13 +1,14 @@
 <h1 class="car-page__title">Car Description</h1>
 
 <ul class="car-page__meta">
-  <li class="car-page__meta-item">車両名：<%= @car.car_name %></li>
-  <li class="car-page__meta-item">発売日：<%= @car.launch_date %></li>
+  <li class="car-page__meta-item">車両名：<%= Car.find(params[:id]).car_name %></li>
+  <li class="car-page__meta-item">発売日：<%= Car.find(params[:id]).launch_date %></li>
 </ul>
 
 <% if user_signed_in? %>
   <div class="car-page__actions">
-    <%= link_to "車両情報の編集", edit_car_path(@car), class: "btn btn--primary" %>
+    <a class="btn btn--primary", id="edit-car">車両情報の編集</a>
+    <%# <%= link_to "車両情報の編集", edit_car_path(@car), class: "btn btn--primary", id: "edit-car" %>
     <%= link_to "車両の削除", car_path(@car), data: { turbo_method: :delete }, class: "btn btn--danger" %>
     <%= link_to "変更履歴", history_car_path(@car), class: "btn btn--secondary" %>
   </div>
@@ -90,3 +91,38 @@
     <% end %>
   </section>
 <% end %>
+
+<%# PopUp============================================================================= %>
+
+<%# Edit register ------------------------------------------------------%>
+<div class="modal" id= "edit-car-form" data-error-messages="<%= @car.errors.any? %>">
+  <div class="modal-content">
+    <%= form_with model: @car, local: true, data: { turbo: false} do |f| %>
+
+        <div class="error-messages">
+          <%= render 'shared/error_messages', model: f.object %>
+        </div>
+
+      <div class="car-form__group">
+        <label class="car-form__label">車両名</label>
+        <%= f.text_area :car_name, class: "car-form__input" %>
+      </div>
+
+      <div class="input-birth-wrap">
+        <%= raw sprintf(
+                    f.date_select(
+                      :launch_date,
+                      class:'select-birth',
+                      id:"launch-date",
+                      use_month_numbers: true,
+                      prompt:'--',
+                      start_year: 2000,
+                      end_year: (Time.now.year + 10),
+                      date_separator: '%s'),
+                    "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+      </div>
+
+      <%= f.submit 'Registration', class: "car-form__submit" %>
+    <% end %>
+  </div>
+</div>
