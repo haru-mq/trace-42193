@@ -10,7 +10,9 @@ class SignalinfosController < ApplicationController
       @car = Car.find(params[:car_id])
       @calculation = Calculation.new(car_id: @car.id)
       @calculations = @car.calculations.includes(:car)
-      render 'cars/show', status: :unprocessable_entity
+      flash[:errors_signalinfo] = @signalinfo.errors.full_messages
+      flash[:input_signalinfo] = params[:signalinfo]
+      redirect_to car_path(@car)
     end
   end
 

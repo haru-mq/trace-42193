@@ -17,9 +17,9 @@
 <% end %>
 
 <%# Calculation register -----------------------------------------------------%>
-<% if flash[:errors] %>
+<% if flash[:errors_calculation] %>
   <div class="error-messages">
-    <% flash[:errors].each do |msg| %>
+    <% flash[:errors_calculation].each do |msg| %>
       <p><%= msg %></p>
     <% end %>
   </div>
@@ -30,7 +30,7 @@
 
     <div class="form__group">
       <label class="form__label">演算名：</label>
-      <%= f.text_field :calculation_name, value: flash[:input]&.[]("calculation_name"), class: "form__input" %>
+      <%= f.text_field :calculation_name, value: flash[:input_calculation]&.[]("calculation_name"), class: "form__input" %>
     </div>
 
     <%= f.submit '登録', class: "btn btn--primary" %>
@@ -38,9 +38,13 @@
 <% end %>
 
 <%# Calculation list ---------------------------------------------------------%>
-<div class="error-messages">
-  <%= render 'shared/error_messages', model: @signalinfo %>
-</div>
+<% if flash[:errors_signalinfo] %>
+  <div class="error-messages">
+    <% flash[:errors_signalinfo].each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+<% end %>
 
 <% @calculations.each do |calculation| %>
   <section class="calculation-card">
@@ -88,12 +92,12 @@
                     class: "form form--inline" do |f| %>
         <div class="form__group">
           <label class="form__label">信号名：</label>
-          <%= f.text_field :signal_name, class: "form__input" %>
+          <%= f.text_field :signal_name, value: flash[:input_signalinfo]&.[]("signal_name"), class: "form__input" %>
         </div>
 
         <div class="form__group">
           <label class="form__label">信号の種類：</label>
-          <%= f.collection_select :signal_type_id, SignalType.all, :id, :name, {}, class: "form__select" %>
+          <%= f.collection_select :signal_type_id, SignalType.all, :id, :name, {}, value: flash[:input_signalinfo]&.[]("signal_type_id"), class: "form__select" %>
         </div>
 
         <%= f.hidden_field :calculation_id, value: calculation.id %>

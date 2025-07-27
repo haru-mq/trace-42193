@@ -11,8 +11,8 @@ class CalculationsController < ApplicationController
       @car = Car.find(params[:car_id])
       @calculations = @car.calculations.includes(:car)
       @signalinfo = Signalinfo.new
-      flash[:errors] = @calculation.errors.full_messages
-      flash[:input] = params[:calculation]
+      flash[:errors_calculation] = @calculation.errors.full_messages
+      flash[:input_calculation] = params[:calculation]
       redirect_to car_path(@car)
     end
   end
