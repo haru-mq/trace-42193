@@ -23,9 +23,14 @@ class CalculationsController < ApplicationController
 
   def update
     if @calculation.update(calculation_params)
-      redirect_to car_path(@calculation.car)
+      redirect_to car_path(@calculation.car_id)
     else
-      render :edit, status: :unprocessable_entity
+      @car = Car.find(params[:car_id])
+      @calculations = @car.calculations.includes(:car)
+      @signalinfo = Signalinfo.new
+      flash[:errors_calculation] = @calculation.errors.full_messages
+      flash[:input_calculation] = params[:calculation]
+      redirect_to car_path(@car)
     end
   end
 

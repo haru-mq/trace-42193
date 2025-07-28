@@ -17,14 +17,6 @@
 <% end %>
 
 <%# Calculation register -----------------------------------------------------%>
-<% if flash[:errors_calculation] %>
-  <div class="error-messages">
-    <% flash[:errors_calculation].each do |msg| %>
-      <p><%= msg %></p>
-    <% end %>
-  </div>
-<% end %>
-
 <% if user_signed_in? %>
   <%= form_with model: [@car, @calculation], local: true, data: { turbo: false }, class: "form" do |f| %>
 
@@ -58,7 +50,13 @@
 
       <% if user_signed_in? %>
         <div class="calculation-card__actions">
-          <%= link_to "編集", edit_car_calculation_path(@car, calculation), class: "btn btn--small btn--secondary" %>
+          <a class="btn btn--small btn--secondary" id="edit-calculation"
+              data-calculation-id=<%= calculation.id %>
+              data-calculation-name=<%= calculation.calculation_name %>
+              data-calculation-car-id=<%= @car.id %>>
+              編集
+          </a>
+          <%# <%= link_to "編集", edit_car_calculation_path(@car, calculation), class: "btn btn--small btn--secondary" %>
           <%= link_to "削除", car_calculation_path(@car, calculation), data: { turbo_method: :delete }, class: "btn btn--small btn--danger" %>
         </div>
       <% end %>
@@ -109,7 +107,7 @@
 
 <%# PopUp============================================================================= %>
 
-<%# Edit Form ------------------------------------------------------%>
+<%# Car Edit Form ------------------------------------------------------%>
 <div class="modal" id= "car-form" data-error-messages="<%= @car.errors.any? %>">
   <div class="modal-content">
     <%= form_with model: @car, local: true, data: { turbo: false } do |f| %>
@@ -140,4 +138,30 @@
       <%= f.submit 'Registration', class: "car-form__submit" %>
     <% end %>
   </div>
+</div>
+
+<%# Calculation Edit Form ------------------------------------------------------%>
+<div class="modal" id= "calculation-form" data-error-messages="<%= flash[:errors_calculation].present? %>">
+  <div class="modal-content">
+
+  <% if flash[:errors_calculation] %>
+    <div class="error-messages">
+      <% flash[:errors_calculation].each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= form_with(model: [@car, @calculation], url: "", 
+              method: :patch, local: true, data: { turbo: false }, html: { id: "calculation-edit-form" }) do |f| %>
+    
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= f.hidden_field :id, id: "calculation-id-field" %>
+
+    <div>
+      演算名：
+      <%= f.text_field :calculation_name, id: "calculation-name-field" %>
+    </div>
+    <%= f.submit '登録' %>
+  <% end %>
 </div>
