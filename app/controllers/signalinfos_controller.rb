@@ -25,7 +25,12 @@ class SignalinfosController < ApplicationController
     if @signalinfo.update(signalinfo_params)
       redirect_to car_path(@signalinfo.calculation.car_id)
     else
-      render :edit, status: :unprocessable_entity
+      @car = Car.find(params[:car_id])
+      @calculation = Calculation.new(car_id: @car.id)
+      @calculations = @car.calculations.includes(:car)
+      flash[:errors_signalinfo] = @signalinfo.errors.full_messages
+      flash[:input_signalinfo] = params[:signalinfo]
+      redirect_to car_path(@car)
     end
   end
 

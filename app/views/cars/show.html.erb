@@ -16,6 +16,14 @@
   </div>
 <% end %>
 
+<% if flash[:errors_calculation] %>
+  <div class="error-messages">
+    <% flash[:errors_calculation].each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+<% end %>
+
 <%# Calculation register -----------------------------------------------------%>
 <% if user_signed_in? %>
   <%= form_with model: [@car, @calculation], local: true, data: { turbo: false }, class: "form" do |f| %>
@@ -56,7 +64,6 @@
               data-calculation-car-id=<%= @car.id %>>
               編集
           </a>
-          <%# <%= link_to "編集", edit_car_calculation_path(@car, calculation), class: "btn btn--small btn--secondary" %>
           <%= link_to "削除", car_calculation_path(@car, calculation), data: { turbo_method: :delete }, class: "btn btn--small btn--danger" %>
         </div>
       <% end %>
@@ -71,7 +78,14 @@
 
           <% if user_signed_in? %>
             <div class="signal-list__actions">
-              <%= link_to "編集", edit_car_calculation_signalinfo_path(@car, calculation, signalinfo), class: "btn btn--tiny btn--secondary" %>
+              <a class="btn btn--small btn--secondary edit-signalinfo"
+                data-signalinfo-id=<%= signalinfo.id %>
+                data-signalinfo-name=<%= signalinfo.signal_name %>
+                data-signalinfo-type=<%= signalinfo.signal_type.id %>
+                data-signal-calculation-id=<%= calculation.id %>
+                data-signal-car-id=<%= @car.id %>>
+              編集
+              </a>
               <%= link_to "削除", car_calculation_signalinfo_path(@car, calculation, signalinfo),
                             data: { turbo_method: :delete },
                             class: "btn btn--tiny btn--danger" %>
@@ -108,7 +122,7 @@
 <%# PopUp============================================================================= %>
 
 <%# Car Edit Form ------------------------------------------------------%>
-<div class="modal" id= "car-form" data-error-messages="<%= @car.errors.any? %>">
+<div class="modal" id="car-form" data-error-messages="<%= @car.errors.any? %>">
   <div class="modal-content">
     <%= form_with model: @car, local: true, data: { turbo: false } do |f| %>
 
@@ -140,28 +154,61 @@
   </div>
 </div>
 
+
 <%# Calculation Edit Form ------------------------------------------------------%>
-<div class="modal" id= "calculation-form" data-error-messages="<%= flash[:errors_calculation].present? %>">
+<div class="modal" id="calculation-form" data-error-messages="<%= flash[:errors_calculation].present? %>">
   <div class="modal-content">
 
-  <% if flash[:errors_calculation] %>
-    <div class="error-messages">
-      <% flash[:errors_calculation].each do |msg| %>
-        <p><%= msg %></p>
-      <% end %>
-    </div>
-  <% end %>
+    <% if flash[:errors_calculation] %>
+      <div class="error-messages">
+        <% flash[:errors_calculation].each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
 
-  <%= form_with(model: [@car, @calculation], url: "", 
-              method: :patch, local: true, data: { turbo: false }, html: { id: "calculation-edit-form" }) do |f| %>
-    
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <%= f.hidden_field :id, id: "calculation-id-field" %>
+    <%= form_with(model: [@car, @calculation], url: "", 
+                method: :patch, local: true, data: { turbo: false }, html: { id: "calculation-edit-form" }) do |f| %>
+      
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= f.hidden_field :id, id: "calculation-id-field" %>
 
-    <div>
-      演算名：
-      <%= f.text_field :calculation_name, id: "calculation-name-field" %>
-    </div>
-    <%= f.submit '登録' %>
-  <% end %>
+      <div>
+        演算名：
+        <%= f.text_field :calculation_name, id: "calculation-name-field" %>
+      </div>
+        <%= f.submit 'Registration', class: "car-form__submit" %>
+    <% end %>
+  </div>
 </div>
+
+<%# SignalInfo Edit Form ------------------------------------------------------%>
+<div class="modal" id="signalinfo-form" data-error-messages="<%= flash[:errors_signalinfo].present? %>">
+  <div class="modal-content">
+
+    <% if flash[:errors_signalinfo] %>
+      <div class="error-messages">
+        <% flash[:errors_signalinfo].each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= form_with(model: [@car, @calculation, @signalinfo], url: "", 
+                method: :patch, local: true, data: { turbo: false }, html: { id: "signalinfo-edit-form" }) do |f| %>
+      
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%# <%= f.hidden_field :id, id: "calculation-id-field" %>
+      
+      <div>
+        信号名：<%= f.text_field :signal_name, id: "signalinfo-name-field" %>
+      </div>
+      <div>
+        信号の種類：
+        <%= f.collection_select(:signal_type_id, SignalType.all, :id, :name, {}, id: "signalinfo-type-field") %>
+      </div>
+      <%= f.submit "信号を更新" %>
+    <% end %>
+
+  </div>
+<div>

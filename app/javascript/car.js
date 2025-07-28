@@ -1,8 +1,8 @@
 window.addEventListener('load', function(){
 
-// Car new & edit form ------------------------------------------------------
-  const newEditCar = this.document.getElementById('new-edit-car');
-  const carForm = this.document.getElementById('car-form');
+  // Car new & edit form ------------------------------------------------------
+  const newEditCar = document.getElementById('new-edit-car');
+  const carForm = document.getElementById('car-form');
   const carErrorMessages = carForm.querySelector('.error-messages');
   
   newEditCar.addEventListener('click', function(){
@@ -23,12 +23,12 @@ window.addEventListener('load', function(){
     }
   });
 
-// Calculation edit form ------------------------------------------------------
-  const newEditCalculation = this.document.getElementById('edit-calculation');
-  const calculationForm = this.document.getElementById('calculation-form');
-  const errorMessages = calculationForm.querySelector('.error-messages');
+  // Calculation edit form ------------------------------------------------------
+  const editCalculation = document.getElementById('edit-calculation');
+  const calculationForm = document.getElementById('calculation-form');
+  const calculationErrorMessages = calculationForm.querySelector('.error-messages');
 
-  newEditCalculation.addEventListener('click', function(){
+  editCalculation.addEventListener('click', function(){
     const calculationId = this.dataset.calculationId;
     const calculationName = this.dataset.calculationName;
     const calculationCarId = this.dataset.calculationCarId;
@@ -50,8 +50,46 @@ window.addEventListener('load', function(){
   this.addEventListener('click', function(e) {
     if (e.target === calculationForm) {
       calculationForm.setAttribute("style", "display: none;");
-      if (errorMessages) {
-        errorMessages.innerHTML = "";
+      if (calculationErrorMessages) {
+        calculationErrorMessages.innerHTML = "";
+      }
+    }
+  });
+
+  // Calculation edit form ------------------------------------------------------
+  const editSignals = document.querySelectorAll('.edit-signalinfo');
+  const signalinfoForm = document.getElementById('signalinfo-form');
+  const signalinfoErrorMessages = signalinfoForm.querySelector('.error-messages');
+
+  editSignals.forEach((editSignal) => {
+    editSignal.addEventListener('click', function() {
+      const signalinfoId = this.dataset.signalinfoId;
+      const signalinfoName = this.dataset.signalinfoName;
+      const signalinfoType = this.dataset.signalinfoType;
+      const signalCalculationId = this.dataset.signalCalculationId;
+      const signalCarId = this.dataset.signalCarId;
+
+      const calculationEditForm = document.getElementById('signalinfo-edit-form');
+      calculationEditForm.setAttribute("action", `/cars/${signalCarId}/calculations/${signalCalculationId}/signalinfos/${signalinfoId}`);
+
+      // document.getElementById('calculation-id-field').value = calculationId;
+      document.getElementById('signalinfo-name-field').value = signalinfoName;
+      document.getElementById('signalinfo-type-field').value = signalinfoType;
+
+      signalinfoForm.setAttribute("style", "display: block;");
+    });
+  });
+
+  const signalInfoErrorShow = signalinfoForm.dataset.errorMessages == "true";
+  if (signalInfoErrorShow){
+    signalinfoForm.setAttribute("style", "display: block;");
+  }
+
+  this.addEventListener('click', function(e) {
+    if (e.target === signalinfoForm) {
+      signalinfoForm.setAttribute("style", "display: none;");
+      if (signalinfoErrorMessages) {
+        signalinfoErrorMessages.innerHTML = "";
       }
     }
   });
