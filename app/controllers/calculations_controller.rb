@@ -1,6 +1,6 @@
 class CalculationsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
-  before_action :set_calculation, only: [:edit, :update, :destroy, :trace_signals]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :set_calculation, only: [:update, :destroy, :trace_signals]
 
 
   def create
@@ -11,14 +11,10 @@ class CalculationsController < ApplicationController
       @car = Car.find(params[:car_id])
       @calculations = @car.calculations.includes(:car)
       @signalinfo = Signalinfo.new
-      flash[:errors_calculation] = @calculation.errors.full_messages
-      flash[:input_calculation] = params[:calculation]
+      flash[:errors_calculation_create] = @calculation.errors.full_messages
+      flash[:input_calculation_create] = params[:calculation]
       redirect_to car_path(@car)
     end
-  end
-
-  def edit
-    @car = Car.find(params[:car_id])
   end
 
   def update
@@ -28,8 +24,8 @@ class CalculationsController < ApplicationController
       @car = Car.find(params[:car_id])
       @calculations = @car.calculations.includes(:car)
       @signalinfo = Signalinfo.new
-      flash[:errors_calculation] = @calculation.errors.full_messages
-      flash[:input_calculation] = params[:calculation]
+      flash[:errors_calculation_update] = @calculation.errors.full_messages
+      flash[:input_calculation_update] = params[:calculation]
       redirect_to car_path(@car)
     end
   end

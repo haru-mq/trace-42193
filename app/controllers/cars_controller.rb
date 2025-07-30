@@ -24,6 +24,7 @@ class CarsController < ApplicationController
     @calculation = Calculation.new(car_id: @car.id)
     @calculations = @car.calculations.includes(:car)
     @signalinfo = Signalinfo.new
+    @signal_form_signalinfo = @signalinfo
   end
 
   def update
