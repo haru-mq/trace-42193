@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update]
 
-  resources :cars do
+  resources :cars, only: [:show, :create, :edit, :update, :destroy] do
     member do
       get :history
     end

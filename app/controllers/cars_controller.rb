@@ -1,13 +1,10 @@
 class CarsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
   before_action :set_car, only: [:show, :update, :destroy, :history]
 
   def index
     @cars = Car.all
     @car = Car.new
-  end
-
-  def new
   end
 
   def create

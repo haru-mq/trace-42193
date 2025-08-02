@@ -3,32 +3,34 @@
 <div class="user-form-wrap">
   <%= form_with model:@user, local:true, html:{class:"user-form"} do |f| %>
 
-    <%= render 'shared/error_messages', model: f.object %>
+    <div class="error-messages">
+      <%= render 'shared/error_messages', model: f.object %>
+    </div>
 
     <div class="form__group">  
-      <%= f.label :department, "部署(必須)" %><br />
+      <%= f.label :department, "部署(必須)" %>
       <%= f.collection_select(:department_id, Department.all, :id, :name, {})%>
     </div>
 
     <div class="form__group">
-      <%= f.label :job_num, "職番(必須)" %><br />
-      <%= f.text_field :job_num %>
+      <%= f.label :job_num, "職番(必須)" %>
+      <%= f.text_field :job_num, placeholder:"8桁の数字" %>
     </div>
 
     <div class="form__group">
-      <%= f.label :email, "メールアドレス(必須)" %><br />
-      <%= f.email_field :email %>
+      <%= f.label :email, "メールアドレス(必須)" %>
+      <%= f.email_field :email, placeholder:"例) taro@trace.jp.com", autocomplete: true %>
     </div>
 
     <div class="form__group">
       <div class="form__group-child">
         <div class="form__group-child-item">
-          <%= f.label :first_name, "苗字(必須)" %><br />
-          <%= f.text_field :first_name %>
+          <%= f.label :first_name, "苗字(必須)" %>
+          <%= f.text_field :first_name, placeholder:"例) 追跡" %>
         </div>
         <div class="form__group-child-item">
-          <%= f.label :last_name, "名前(必須)" %><br />
-          <%= f.text_field :last_name %>
+          <%= f.label :last_name, "名前(必須)" %>
+          <%= f.text_field :last_name, placeholder:"例) 太郎" %>
         </div>
       </div>
     </div>
@@ -36,29 +38,29 @@
     <div class="form__group">
       <div class="form__group-child">
         <div class="form__group-child-item">
-          <%= f.label :first_name_kana, "苗字カナ(任意)" %><br />
-          <%= f.text_field :first_name_kana %>
+          <%= f.label :first_name_kana, "苗字カナ(必須)" %>
+          <%= f.text_field :first_name_kana, placeholder:"例) トレース" %>
         </div>
         <div class="form__group-child-item">
-          <%= f.label :last_name_kana, "名前カナ(任意)" %><br />
-          <%= f.text_field :last_name_kana %>
+          <%= f.label :last_name_kana, "名前カナ(必須)" %>
+          <%= f.text_field :last_name_kana, placeholder:"例) タロウ" %>
         </div>
       </div>
     </div>
 
     <div class="form__group">
-      <%= f.label :password, "新しいパスワード(任意)" %><br />
-      <%= f.password_field :password, autocomplete: "off" %>
+      <%= f.label :password, "新しいパスワード(任意)" %>
+      <%= f.password_field :password, placeholder:"全角半角英数字を全て含む6文字以上で入力してください。", autocomplete: "off" %>
     </div>
 
     <div class="form__group">
-      <%= f.label :password_confirmation, "新しいパスワードの確認(任意)" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      <%= f.label :password_confirmation, "新しいパスワードの確認(任意)" %>
+      <%= f.password_field :password_confirmation, placeholder:"同じパスワードを入力してください。", autocomplete: "off" %>
     </div>
 
     <div class="form__group">
-      <%= f.label :current_password, "現在のパスワード(必須)" %><br />
-      <%= f.password_field :current_password, autocomplete: "off" %>
+      <%= f.label :current_password, "現在のパスワード(必須)" %>
+      <%= f.password_field :current_password, placeholder:"全角半角英数字を全て含む6文字以上で入力してください。", autocomplete: "off" %>
     </div>
 
     <div>

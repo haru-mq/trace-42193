@@ -10,9 +10,10 @@ class Signalinfo < ApplicationRecord
     signal_type_id: :signal_type_id
   }
   
-  validates :signal_name, :signal_type_id, presence: true
+  validates :signal_name, presence: true,
+  format: { with: /\A[a-zA-Z0-9]+\z/, message: "must contain only letters and numbers"}
 
-  validates :signal_type_id, numericality: { other_than: 1, message: "must be other than 1" }
+  validates :signal_type_id, presence: true, numericality: { other_than: 1, message: "must be other than 1" }
 
   def car_id_from_association
     calculation.car_id

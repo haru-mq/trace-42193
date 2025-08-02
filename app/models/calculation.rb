@@ -7,6 +7,9 @@ class Calculation < ApplicationRecord
     calculation_id: :id
   }
 
-  validates :calculation_name, :car_id, presence: true
+  validates :calculation_name, presence: true,
+  format: { with: /\A[a-zA-Z0-9]+\z/, message: "must contain only letters and numbers"}
+  
+  validates :car_id, presence: true
 
 end
