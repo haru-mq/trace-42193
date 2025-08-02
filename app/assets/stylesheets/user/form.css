@@ -1,0 +1,29 @@
+.user-form-wrap{
+  width:480px;
+  margin:0 auto;
+  padding: 1rem 0;
+}
+
+.user-form label{
+  font-size:14px;
+}
+
+.user-form .form__group input,
+.user-form .form__group select{
+  width:100%;
+  padding:.45rem;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:.9rem;
+  box-sizing: border-box;
+}
+
+.user-form .form__group-child {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.user-form .form__group-child .form__group-child-item {
+  width: 45%;
+}

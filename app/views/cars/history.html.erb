@@ -1,25 +1,33 @@
-<h2 class="history-title">この車両に関する変更履歴</h2>
+<h2 class="page_title">変更履歴</h2>
 
 <div class="history-wrap">
+  <h3 class="table_title">車両「<%= @car.car_name %>」の変更履歴</h3>
   <% if @history.any? %>
-    <ul class="history-list">
-      <% @history.each do |h| %>
-        <li>日時：<%= h[:time].strftime("%m月%d日 %H時%M分") %></li>
-        <li>変更者：<%= h[:user].first_name %><%= h[:user].last_name %></li>
-        <li>変更：<%= h[:event] %></li>
-        <li>変更箇所：<%= h[:model] %></li>
-
-        <li>車両：<%= h[:car].car_name %></li>
-        <% if h[:calculation] %>
-          <li>演算：<%= h[:calculation].calculation_name %></li>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>日時<br/>
+              /変更者</th>
+          <th>変更</th>
+          <th>変更箇所</th>
+          <th>対象</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @history.each do |h| %>
+          <tr>
+            <td><%= h[:time].strftime("%m月%d日 %H:%M") %><br/>
+                /<%= h[:user].first_name %><%= h[:user].last_name %></td>
+            <td><%= h[:event] %></td>
+            <td><%= h[:model] %></td>
+            <td>車両：<%= h[:car].car_name %><br/>
+                演算：<%= h[:calculation]&.calculation_name || "-" %><br/>
+                信号：<%= h[:signal_name] || "-" %><br/>
+                信号の種類：<%= h[:signal_type_id]&.name || "-" %></td>
+          </tr>
         <% end %>
-        <% if h[:signal_name] %>
-          <li>信号：<%= h[:signal_name] %></li>
-          <li>信号の種類：<%= h[:signal_type_id].name %></li>
-        <% end %>
-      <% end %>
-    </ul>
+      </tbody>
+    </table>
   <% end %>
-
-  <%= link_to 'Return', car_path(@car), class: "history-return" %>
+  <%= link_to '戻る', car_path(@car), class: "btn btn--return" %>
 </div>

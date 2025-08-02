@@ -1,16 +1,20 @@
-<h2 class="car-index__title">車両一覧</h2>
-
-<ul class="car-list">
-  <% @cars.each do |car| %>
-    <li>車両名：<%= link_to car.car_name, car_path(car) %></li>
-    <li>発売日：<%= car.launch_date %></li>
-    <li>登録者：<%= car.user.first_name %><%= car.user.last_name %></li>
+<h2 class="page_title">車両一覧</h2>
+  <% if user_signed_in? %>
+    <span class="user-name">Hello!<%= current_user.first_name %>さん!</span>
   <% end %>
-</ul>
+
+  <% @cars.each do |car| %>
+    <div class="car-list">
+      <div class="car-list__left">車両名：<%= link_to car.car_name, car_path(car) %></div>
+      <ul class="car-list__right">
+        <li>発売日：<%= car.launch_date %></li>
+        <li>登録者：<%= car.user.first_name %><%= car.user.last_name %></li>
+      </ul>
+    </div>
+  <% end %>
 
 <% if user_signed_in? %>
     <a class="btn btn--primary", id="new-edit-car">新規登録</a>
-  <%# <%= link_to "新規登録", new_car_path, class:"car-index__new" %>
 <% end %>
 
 <%# New Form ------------------------------------------------------%>
@@ -22,12 +26,13 @@
           <%= render 'shared/error_messages', model: f.object %>
         </div>
 
-      <div class="car-form__group">
-        <label class="car-form__label">車両名</label>
-        <%= f.text_area :car_name, class: "car-form__input" %>
+      <div class="form__group">
+        <label class="form__label">車両名：</label>
+        <%= f.text_area :car_name, class: "form__input" %>
       </div>
 
       <div class="input-birth-wrap">
+        <label class="form__label">発売日：</label>
         <%= raw sprintf(
                     f.date_select(
                       :launch_date,
@@ -41,7 +46,7 @@
                     "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
       </div>
 
-      <%= f.submit 'Registration', class: "car-form__submit" %>
+      <%= f.submit '車両名を更新', class:"btn btn--new-edit" %>
     <% end %>
   </div>
 </div>

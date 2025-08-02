@@ -1,62 +1,68 @@
-<h2 class="user-edit-title">Edit User</h2>
+<h2 class="page_title">会員情報の変更</h2>
 
-<div class="user-edit-wrap">
-  <%= form_with model:@user, local:true, html:{class:"user-edit-form"} do |f| %>
+<div class="user-form-wrap">
+  <%= form_with model:@user, local:true, html:{class:"user-form"} do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %>
 
-    <div class="field">  
-      <%= f.label :department %><br />
+    <div class="form__group">  
+      <%= f.label :department, "部署(必須)" %><br />
       <%= f.collection_select(:department_id, Department.all, :id, :name, {})%>
     </div>
 
-    <div class="field">
-      <%= f.label :job_num %><br />
+    <div class="form__group">
+      <%= f.label :job_num, "職番(必須)" %><br />
       <%= f.text_field :job_num %>
     </div>
 
-    <div class="field">
-      <%= f.label :email %><br />
+    <div class="form__group">
+      <%= f.label :email, "メールアドレス(必須)" %><br />
       <%= f.email_field :email %>
     </div>
 
-    <div class="field">
-      <%= f.label :first_name %><br />
-      <%= f.text_field :first_name %>
+    <div class="form__group">
+      <div class="form__group-child">
+        <div class="form__group-child-item">
+          <%= f.label :first_name, "苗字(必須)" %><br />
+          <%= f.text_field :first_name %>
+        </div>
+        <div class="form__group-child-item">
+          <%= f.label :last_name, "名前(必須)" %><br />
+          <%= f.text_field :last_name %>
+        </div>
+      </div>
     </div>
 
-    <div class="field">
-      <%= f.label :last_name %><br />
-      <%= f.text_field :last_name %>
+    <div class="form__group">
+      <div class="form__group-child">
+        <div class="form__group-child-item">
+          <%= f.label :first_name_kana, "苗字カナ(任意)" %><br />
+          <%= f.text_field :first_name_kana %>
+        </div>
+        <div class="form__group-child-item">
+          <%= f.label :last_name_kana, "名前カナ(任意)" %><br />
+          <%= f.text_field :last_name_kana %>
+        </div>
+      </div>
     </div>
 
-    <div class="field">
-      <%= f.label :first_name_kana %><br />
-      <%= f.text_field :first_name_kana %>
-    </div>
-
-    <div class="field">
-      <%= f.label :last_name_kana %><br />
-      <%= f.text_field :last_name_kana %>
-    </div>
-
-    <div class="field">
+    <div class="form__group">
       <%= f.label :password, "新しいパスワード(任意)" %><br />
       <%= f.password_field :password, autocomplete: "off" %>
     </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
+    <div class="form__group">
+      <%= f.label :password_confirmation, "新しいパスワードの確認(任意)" %><br />
       <%= f.password_field :password_confirmation, autocomplete: "off" %>
     </div>
 
-    <div class="field">
+    <div class="form__group">
       <%= f.label :current_password, "現在のパスワード(必須)" %><br />
       <%= f.password_field :current_password, autocomplete: "off" %>
     </div>
 
     <div>
-      <%= f.submit "会員登録" %>
+      <%= f.submit "変更", class:"btn btn--new-edit" %>
     </div>
   <% end %>
 </div>

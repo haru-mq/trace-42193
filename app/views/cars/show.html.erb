@@ -1,18 +1,23 @@
-<h1 class="car-page__title">Car Description</h1>
+<h2 class="page_title">車両の詳細</h2>
 
-<ul class="car-page__meta">
+<div class="car-page__meta">
   <%# For car update miss %>
   <% saved_car = Car.find(@car.id).car_name %>
   <% saved_launch_date = Car.find(@car.id).launch_date %>
-  <li class="car-page__meta-item">車両名：<%= saved_car %></li>
-  <li class="car-page__meta-item">発売日：<%= saved_launch_date %></li>
-</ul>
+  <% saved_user_name = Car.find(@car.id).user.first_name %>
+
+  <div class="car-list__left">車両名：<%= saved_car %></div>
+  <ul class="car-list__right">
+    <li>発売日：<%= saved_launch_date %></li>
+    <li>登録者：<%= saved_user_name %></li>
+  </ul>
+</div>
 
 <% if user_signed_in? %>
   <div class="car-page__actions">
-    <a class="btn btn--primary", id="new-edit-car">車両情報の編集</a>
+    <a class="btn btn--new-edit" id="new-edit-car">車両情報の編集</a>
     <%= link_to "車両の削除", car_path(@car), data: { turbo_method: :delete }, class: "btn btn--danger" %>
-    <%= link_to "変更履歴", history_car_path(@car), class: "btn btn--secondary" %>
+    <%= link_to "変更履歴", history_car_path(@car), class: "btn btn--history" %>
   </div>
 <% end %>
 
@@ -25,17 +30,19 @@
 <% end %>
 
 <%# Calculation register -----------------------------------------------------%>
-<% if user_signed_in? %>
-  <%= form_with model: [@car, @calculation], local: true, data: { turbo: false }, class: "form" do |f| %>
+<div class=calculation-form__actions>
+  <% if user_signed_in? %>
+    <%= form_with model: [@car, @calculation], local: true, data: { turbo: false }, class: "form" do |f| %>
 
-    <div class="form__group">
-      <label class="form__label">演算名：</label>
-      <%= f.text_field :calculation_name, value: flash[:input_calculation_create]&.[]("calculation_name"), class: "form__input" %>
-    </div>
+      <div class="form__group">
+        <label class="form__label">演算名：</label>
+        <%= f.text_field :calculation_name, value: flash[:input_calculation_create]&.[]("calculation_name"), class: "form__input" %>
+      </div>
 
-    <%= f.submit '登録', class: "btn btn--primary" %>
+      <%= f.submit '登録', class: "btn btn--new-edit" %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
 <%# Calculation list ---------------------------------------------------------%>
 <% if flash[:errors_signalinfo_create] %>
@@ -52,19 +59,15 @@
       <h2 class="calculation-card__title">演算名：<%= calculation.calculation_name %></h2>
 
     <%# Signal trace -------------------------------------------------------%>
-      <p class="calculation-card__trace">
-        <%= link_to "信号の追跡", trace_signals_car_calculation_path(@car, calculation), class: "btn btn--secondary btn--small" %>
-      </p>
-
       <% if user_signed_in? %>
         <div class="calculation-card__actions">
-          <a class="btn btn--small btn--secondary" id="edit-calculation"
+          <a class="btn btn--new-edit btn--small" id="edit-calculation"
               data-calculation-id=<%= calculation.id %>
               data-calculation-name=<%= calculation.calculation_name %>
               data-car-id=<%= @car.id %>>
               編集
           </a>
-          <%= link_to "削除", car_calculation_path(@car, calculation), data: { turbo_method: :delete }, class: "btn btn--small btn--danger" %>
+          <%= link_to "削除", car_calculation_path(@car, calculation), data: { turbo_method: :delete }, class: "btn btn--danger btn--small" %>
         </div>
       <% end %>
     </header>
@@ -78,7 +81,7 @@
 
           <% if user_signed_in? %>
             <div class="signal-list__actions">
-              <a class="btn btn--small btn--secondary edit-signalinfo"
+              <a class="btn btn--tiny btn--new-edit edit-signalinfo"
                 data-signalinfo-id=<%= signalinfo.id %>
                 data-signalinfo-name=<%= signalinfo.signal_name %>
                 data-signalinfo-type=<%= signalinfo.signal_type.id %>
@@ -96,26 +99,35 @@
     </ul>
 
     <%# Signal register ------------------------------------------------------%>
-    <% if user_signed_in? %>
-      <%= form_with model: @signalinfo,
-                    url: car_calculation_signalinfos_path(@car, calculation),
-                    local: true,
-                    data: { turbo: false },
-                    class: "form form--inline" do |f| %>
-        <div class="form__group">
-          <label class="form__label">信号名：</label>
-          <%= f.text_field :signal_name, value: flash[:input_signalinfo_create]&.[]("signal_name"), class: "form__input" %>
-        </div>
+    <div class=signal-form__actions>  
+      <% if user_signed_in? %>
+        <%= form_with model: @signalinfo,
+                      url: car_calculation_signalinfos_path(@car, calculation),
+                      local: true,
+                      data: { turbo: false },
+                      class: "form" do |f| %>
+          <div class="form--inline">
+            <div class="form__group">
+              <label class="form__label">信号名：</label>
+              <%= f.text_field :signal_name, value: flash[:input_signalinfo_create]&.[]("signal_name"), class: "form__input" %>
+            </div>
 
-        <div class="form__group">
-          <label class="form__label">信号の種類：</label>
-          <%= f.collection_select :signal_type_id, SignalType.all, :id, :name, {}, value: flash[:input_signalinfo_create]&.[]("signal_type_id"), class: "form__select" %>
-        </div>
+            <div class="form__group">
+              <label class="form__label">信号の種類：</label>
+              <%= f.collection_select :signal_type_id, SignalType.all, :id, :name, {}, value: flash[:input_signalinfo_create]&.[]("signal_type_id"), class: "form__select" %>
+            </div>
+          </div>
 
-        <%= f.hidden_field :calculation_id, value: calculation.id %>
-        <%= f.submit "信号を追加", class: "btn btn--primary btn--small" %>
+          <%= f.hidden_field :calculation_id, value: calculation.id %>
+          <%= f.submit "信号を追加", class: "btn btn--new-edit btn--small" %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
+
+    <p class="calculation-card__trace">
+      <%= link_to "信号を追跡", trace_signals_car_calculation_path(@car, calculation), class: "btn btn--trace" %>
+    </p>
+
   </section>
 <% end %>
 
@@ -130,12 +142,13 @@
           <%= render 'shared/error_messages', model: f.object %>
         </div>
 
-      <div class="car-form__group">
-        <label class="car-form__label">車両名</label>
-        <%= f.text_area :car_name, class: "car-form__input" %>
+      <div class="form__group">
+        <label class="form__label">車両名：</label>
+        <%= f.text_field :car_name, class: "form__input" %>
       </div>
 
       <div class="input-birth-wrap">
+        <label class="form__label">発売日：</label>
         <%= raw sprintf(
                     f.date_select(
                       :launch_date,
@@ -149,7 +162,7 @@
                     "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
       </div>
 
-      <%= f.submit 'Registration', class: "car-form__submit" %>
+      <%= f.submit '車両名を更新', class:"btn btn--new-edit" %>
     <% end %>
   </div>
 </div>
@@ -175,13 +188,13 @@
       
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <%= f.hidden_field :id, id: "calculation-id-field" %>
-
-      <div>
-        演算名：
-        <%= f.text_field :calculation_name, id: "calculation-name-field",
+      
+      <div class="form__group">
+        <label class="form__label">演算名：</label>
+        <%= f.text_field :calculation_name, class: "form__input", id: "calculation-name-field",
               value: flash[:input_calculation_create]&.[]("calculation_name") %>
       </div>
-        <%= f.submit 'Registration', class: "car-form__submit" %>
+        <%= f.submit '演算名を更新', class:"btn btn--new-edit" %>
     <% end %>
   </div>
 </div>
@@ -207,16 +220,17 @@
       
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       
-      <div>
-        信号名：<%= f.text_field :signal_name, id: "signalinfo-name-field",
-                  value: flash[:input_signalinfo_update]&.[]("signal_name")%>
+      <div class="form__group">
+        <label class="form__label">信号名：</label>
+        <%= f.text_field :signal_name, class: "form__input", id: "signalinfo-name-field",
+              value: flash[:input_signalinfo_update]&.[]("signal_name")%>
       </div>
-      <div>
-        信号の種類：
+      <div class="form__group">
+        <label class="form__label">信号の種類：</label>
         <%= f.collection_select(:signal_type_id, SignalType.all, :id, :name,
             { selected: flash[:input_signalinfo_update]&.[]("signal_type_id") }, { id: "signalinfo-type-field" }) %>
       </div>
-      <%= f.submit "信号を更新" %>
+      <%= f.submit "信号名を更新", class:"btn btn--new-edit" %>
     <% end %>
 
   </div>
