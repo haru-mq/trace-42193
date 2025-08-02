@@ -5,11 +5,6 @@ window.addEventListener('turbo:load', function(){
     modal.style.display = "block";
   }
 
-  function setFormError(form) {
-    if(form?.dataset.errorMessages == "true")
-      form.style.display = "block";
-  }
-
   function hideModal(modal, errorMessages) {
     modal.style.display = "none";
     if (errorMessages) errorMessages.innerHTML = "";
