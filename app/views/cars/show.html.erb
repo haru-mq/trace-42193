@@ -61,7 +61,7 @@
           <a class="btn btn--small btn--secondary" id="edit-calculation"
               data-calculation-id=<%= calculation.id %>
               data-calculation-name=<%= calculation.calculation_name %>
-              data-calculation-car-id=<%= @car.id %>>
+              data-car-id=<%= @car.id %>>
               編集
           </a>
           <%= link_to "削除", car_calculation_path(@car, calculation), data: { turbo_method: :delete }, class: "btn btn--small btn--danger" %>
@@ -82,8 +82,8 @@
                 data-signalinfo-id=<%= signalinfo.id %>
                 data-signalinfo-name=<%= signalinfo.signal_name %>
                 data-signalinfo-type=<%= signalinfo.signal_type.id %>
-                data-signal-calculation-id=<%= calculation.id %>
-                data-signal-car-id=<%= @car.id %>>
+                data-calculation-id=<%= calculation.id %>
+                data-car-id=<%= @car.id %>>
               編集
               </a>
               <%= link_to "削除", car_calculation_signalinfo_path(@car, calculation, signalinfo),
@@ -156,7 +156,10 @@
 
 
 <%# Calculation Edit Form ------------------------------------------------------%>
-<div class="modal" id="calculation-form" data-error-messages="<%= flash[:errors_calculation_update].present? %>">
+<div class="modal" id="calculation-form"
+      data-error-messages="<%= flash[:errors_calculation_update].present? %>"
+      data-car-id="<%= flash[:calculation_error_id]&.dig("car_id") %>"
+      data-calculation-id="<%= flash[:calculation_error_id]&.dig("calculation_id") %>">
   <div class="modal-content">
 
     <% if flash[:errors_calculation_update] %>
@@ -203,9 +206,6 @@
                 method: :patch, local: true, data: { turbo: false }, html: { id: "signalinfo-edit-form" }) do |f| %>
       
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-      <% if flash[:input_signalinfo_update] %>
-        <p>signal_name: <%= flash[:input_signalinfo_update]["signal_name"] %></p>
-      <% end %>
       
       <div>
         信号名：<%= f.text_field :signal_name, id: "signalinfo-name-field",
