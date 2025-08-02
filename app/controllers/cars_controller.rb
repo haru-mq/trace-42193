@@ -13,7 +13,7 @@ class CarsController < ApplicationController
   def create
     @car = Car.new(car_params)
     if @car.save
-      redirect_to '/'
+      redirect_to root_path
     else
       @cars = Car.all
       render :index, status: :unprocessable_entity
@@ -21,9 +21,7 @@ class CarsController < ApplicationController
   end
 
   def show
-    @calculation = Calculation.new(car_id: @car.id)
-    @calculations = @car.calculations.includes(:car)
-    @signalinfo = Signalinfo.new
+    prepare_show_page
     @signal_form_signalinfo = @signalinfo
   end
 
@@ -31,21 +29,18 @@ class CarsController < ApplicationController
     if @car.update(car_params)
       redirect_to car_path(@car)
     else
-      @calculation = Calculation.new(car_id: @car.id)
-      @calculations = @car.calculations.includes(:car)
-      @signalinfo = Signalinfo.new
+      prepare_show_page
       render :show, status: :unprocessable_entity
     end
   end
 
   def destroy
     @car.destroy
-    redirect_to '/'
+    redirect_to root_path
   end
 
   def history
     raw_versions = PaperTrail::Version.where(car_id: @car.id)
-
     user_ids = raw_versions.map(&:whodunnit).map(&:to_i)
     users = User.where(id: user_ids).index_by(&:id)
 
@@ -68,6 +63,12 @@ class CarsController < ApplicationController
 
   def set_car
     @car = Car.find(params[:id])
+  end
+
+  def prepare_show_page
+    @calculation = Calculation.new(car_id: @car.id)
+    @calculations = @car.calculations.includes(:car)
+    @signalinfo = Signalinfo.new
   end
 
   def car_params

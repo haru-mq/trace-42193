@@ -214,7 +214,7 @@
       <div>
         信号の種類：
         <%= f.collection_select(:signal_type_id, SignalType.all, :id, :name,
-            { selected: flash[:input_signalinfo_create]&.[]("signal_type_id") }, { id: "signalinfo-type-field" }) %>
+            { selected: flash[:input_signalinfo_update]&.[]("signal_type_id") }, { id: "signalinfo-type-field" }) %>
       </div>
       <%= f.submit "信号を更新" %>
     <% end %>
