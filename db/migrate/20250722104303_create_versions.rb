@@ -13,7 +13,6 @@ class CreateVersions < ActiveRecord::Migration[7.1]
       # Consider using bigint type for performance if you are going to store only numeric ids.
       # t.bigint   :whodunnit
       t.string   :whodunnit
-      t.string   :reason
       # Known issue in MySQL: fractional second precision
       # -------------------------------------------------
       #

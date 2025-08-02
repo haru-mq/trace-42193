@@ -54,7 +54,6 @@ class CarsController < ApplicationController
         calculation:  v.item_type == "Signalinfo" ? Calculation.find_by(id: v.calculation_id) : (v.item_type == "Calculation" ? Calculation.find_by(id: v.calculation_id) : nil),
         signal_name:   v.item_type == "Signalinfo" ? v.signal_name : nil,
         signal_type_id: v.item_type == "Signalinfo" ? SignalType.find_by(id: v.signal_type_id) : nil,
-        reason: v.reason
       }
     end
   end
