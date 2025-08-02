@@ -1,25 +1,12 @@
 /* ===== cars/new & cars/edit ===== */
-.car-form-wrap{
-  width:480px;
-  margin:0 auto;
-  padding:1rem 0;
-}
-
-.car-form-title{
-  font-size:1.4rem;
-  margin-bottom:1rem;
-}
-
-.car-form{
-  margin:1rem 0;
-}
-
-.car-form .error-messages{
+.error-messages{
+  color: red;
   margin-bottom:.8rem;
 }
 
 .car-form__group{
   margin-bottom:.8rem;
+  width:100%;
 }
 
 .car-form__label{
@@ -29,12 +16,12 @@
 }
 
 .car-form__input{
+  box-sizing: border-box;
   width:100%;
   padding:.45rem;
   border:1px solid #ccc;
   border-radius:6px;
   font-size:.9rem;
-  resize:vertical;
 }
 
 /* date select group */
@@ -55,7 +42,7 @@
 /* submit */
 .car-form__submit{
   display:block;
-  width:100%;
+  width: 100%;
   padding:.55rem;
   background:#3867d6;
   color:#fff;
@@ -66,4 +53,8 @@
 }
 .car-form__submit:hover{
   opacity:.9;
+}
+
+#edit-car-form {
+  display: none;
 }

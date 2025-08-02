@@ -1,13 +1,13 @@
 class CarsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_car, only: [:show, :edit, :update, :destroy, :history]
+  before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
+  before_action :set_car, only: [:show, :update, :destroy, :history]
 
   def index
     @cars = Car.all
+    @car = Car.new
   end
 
   def new
-    @car = Car.new
   end
 
   def create
@@ -15,7 +15,8 @@ class CarsController < ApplicationController
     if @car.save
       redirect_to '/'
     else
-      render :new, status: :unprocessable_entity
+      @cars = Car.all
+      render :index, status: :unprocessable_entity
     end
   end
 
@@ -23,16 +24,17 @@ class CarsController < ApplicationController
     @calculation = Calculation.new(car_id: @car.id)
     @calculations = @car.calculations.includes(:car)
     @signalinfo = Signalinfo.new
-  end
-
-  def edit
+    @signal_form_signalinfo = @signalinfo
   end
 
   def update
     if @car.update(car_params)
       redirect_to car_path(@car)
     else
-      render :edit, status: :unprocessable_entity
+      @calculation = Calculation.new(car_id: @car.id)
+      @calculations = @car.calculations.includes(:car)
+      @signalinfo = Signalinfo.new
+      render :show, status: :unprocessable_entity
     end
   end
 
