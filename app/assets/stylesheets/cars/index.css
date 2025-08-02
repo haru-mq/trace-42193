@@ -1,50 +1,53 @@
 /* ---------- car index ---------- */
-h2{
-  margin:1rem 0;
-  font-size:1.3rem;
+.user-name {
+  display: block;
+  text-align: right;
+  font-size: 16px;
+  margin: 0 0 15px 0;
 }
 
-/* list wrapper */
-ul.car-list{
-  padding-left:0;
-  margin-bottom:2rem;
+/* ----- 車両リスト ----- */
+.car-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid #aaaaaa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* each <li> (3 lines constitute one car) */
-ul.car-list li{
-  padding:.6rem .8rem;
-  background:#fff;
-  border:1px solid #e0e0e0;
-  border-radius:6px;
-  font-size:.9rem;
-  margin-bottom:.4rem;
+.car-list__left {
+  font-size: 18px;
 }
 
-/* add extra gap after every 3rd <li> (= after one car block) */
-ul.car-list li:nth-child(3n){
-  margin-bottom:1rem;
+.car-list__left a {
+  color: #3867d6;
+  text-decoration: none;
 }
 
-/* link style */
-ul.car-list a{
-  color:#3867d6;
-  text-decoration:none;
-}
-ul.car-list a:hover{
-  text-decoration:underline;
+.car-list__right {
+  width: 140px;
 }
 
-/* new-car button */
-.car-index__new{
-  display:block;
-  width:480px;
-  max-width:100%;
-  padding:.5rem;
-  background:#3867d6;
-  color:#fff;
-  text-align:center;
-  border-radius:6px;
-  text-decoration:none;
-  font-size:.9rem;
+.car-list__right li {
+  margin-bottom: 2px;
+  font-size: 14px;
 }
-.car-index__new:hover{opacity:.85}
+
+.btn.btn--primary {
+  display: block;
+  background: #3867d6;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 20px auto 20px auto;
+  text-align: center;
+  width: fit-content;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn.btn--primary:hover {
+  opacity: 0.85;
+}

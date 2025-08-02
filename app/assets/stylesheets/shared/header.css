@@ -1,36 +1,53 @@
-/* ---------- base layout ---------- */
-body{
-  background:#f4f6f8;
-  color:#2d3436;
-  font-family:"Helvetica Neue", Arial, sans-serif;
-  margin:0;
-}
-
-/* center whole app in a narrow column */
-.container{
-  width:480px;
-  margin:0 auto;
-  padding:0 1rem;
-}
-
 /* ---------- header ---------- */
 .header{
   background:#3867d6;
-  color:#fff;
-  box-shadow:0 2px 4px rgba(0,0,0,.05);
 }
+
 .header__bar{
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  align-items:flex-end;
   max-width:480px;
   margin:0 auto;
   padding:.8rem 1rem;
 }
-.header a{color:#fff;text-decoration:none}
-.header ul{display:flex;gap:.8rem}
-.header li{font-size:.9rem}
 
-/* ---------- grid helpers ---------- */
-.row{display:flex;flex-wrap:wrap}
-.grid-6{flex:0 0 50%}
+a {
+  text-decoration:none;
+}
+
+a:hover{
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+.header__title a {
+  color:#fff;
+  font-size: 40px;
+}
+
+.header__title a:visited{
+  color: #ffffff;
+}
+
+.lists-right ul{
+  display: flex;
+}
+
+.lists-right li {
+  margin-left: 10px;
+  background-color: #ffffff;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.lists-right li a {
+  color: #3867d6;
+  text-decoration: none;
+  display: block;
+}
+
+.lists-right li a:visited {
+  color: #3867d6;
+}

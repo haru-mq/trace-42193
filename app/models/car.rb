@@ -1,7 +1,7 @@
 class Car < ApplicationRecord
 
   belongs_to :user
-  has_many :calculations
+  has_many :calculations, dependent: :destroy
   has_paper_trail on: [:create, :update, :destroy], meta: {
     car_id: :id
   }

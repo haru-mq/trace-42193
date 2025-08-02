@@ -1,8 +1,6 @@
-<h2 class="profile-title">プロフィール</h2>
+<h2 class="page_title">プロフィール</h2>
 
 <div class="profile-wrap">
-  <%= link_to "編集", edit_user_path(@user), class:"profile-edit" %>
-
   <ul class="profile-list">
     <li>部署名：<%= @user.department.name %></li>
     <li>職番：<%= @user.job_num %></li>
@@ -13,5 +11,6 @@
     <li>名前カナ：<%= @user.first_name_kana %></li>
   </ul>
 
-  <%= link_to "Return", cars_path, class:"profile-return" %>
+  <%= link_to "編集", edit_user_path(@user), class:"btn btn--new-edit" %>
+  <%= link_to "戻る", cars_path, class:"btn btn--return" %>
 </div>

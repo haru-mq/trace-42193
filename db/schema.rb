@@ -55,9 +55,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_22_104303) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "versions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "versions", charset: "utf8mb3", force: :cascade do |t|
     t.string "whodunnit"
-    t.string "reason"
     t.datetime "created_at"
     t.bigint "item_id", null: false
     t.string "item_type", limit: 191, null: false

@@ -1,55 +1,73 @@
 /* ---------- car page ---------- */
-.car-page__title{
-  margin:1rem 0;
-  font-size:1.4rem;
-}
-
 .car-page__meta{
-  margin-bottom:1rem;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 10px 0;
+  border-bottom: 1px solid #aaaaaa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .car-page__meta-item{
   margin-bottom:.25rem;
 }
 
-/* action button block */
-.car-page__actions{
-  display:block;       /* stack buttons vertically */
-  margin-bottom:1.5rem;
-}
-
-/* ---------- buttons (extra sizes) ---------- */
-.btn--small{
-  font-size:.8rem;
-  padding:.35rem .8rem;
-  width:auto;
-}
-.btn--tiny{
-  font-size:.75rem;
-  padding:.25rem .6rem;
-  width:auto;
+.car-page__actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 60px; 
 }
 
 /* ---------- forms ---------- */
-.form{margin:1.5rem 0}
-.form__group{margin-bottom:.6rem}
+.form{
+  margin:1.5rem 0;
+}
+
+.form__group{
+  margin-bottom:.6rem;
+}
+
 .form__label{
   display:block;
-  font-size:.85rem;
+  font-size:14px;
   margin-bottom:.25rem;
 }
+
 .form__input,
 .form__select{
   width:100%;
   max-width:480px;
-  padding:.45rem;
+  padding:.45rem .4rem;
   border:1px solid #ccc;
   border-radius:6px;
+  box-sizing: border-box;
 }
+
 .form--inline{
   display:flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.calculation-form__actions {
+  margin-bottom: 60px;
+}
+
+.signal-form__actions {
+  padding-left:1rem;  
+}
+
+.calculation-card__trace {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.input-birth-wrap{
+  display:flex;
   flex-wrap:wrap;
-  gap:.5rem 1rem;
-  align-items:flex-end;
+  gap:.25rem .4rem;
+  align-items:center;
+  margin:0 0 .8rem 0;
 }
 
 /* ---------- calculation card ---------- */
@@ -58,23 +76,19 @@
   border-radius:6px;
   padding:1rem;
   margin-bottom:1rem;
-  box-shadow:0 1px 3px rgba(0,0,0,.05);
+  box-shadow:0 1px 3px rgba(0,0,0,.5);
 }
 .calculation-card__header{
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
-  gap:.5rem;
+  align-items:center;
 }
+
 .calculation-card__title{
   font-size:1.1rem;
 }
 .calculation-card__actions{
-  display:block;       /* stack edit/delete buttons */
-}
-.calculation-card__trace{
-  margin-top:.5rem;
-  text-align:right;
+  display:block;
 }
 
 /* ---------- signal list ---------- */
@@ -87,4 +101,7 @@
   padding-bottom:.5rem;
   border-bottom:1px dashed #e0e0e0;
 }
-.signal-list__actions .btn{margin-top:.3rem}
+
+.signal-list__item span{
+  margin-right: 30px;
+}

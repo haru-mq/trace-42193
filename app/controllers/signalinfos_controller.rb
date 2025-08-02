@@ -7,8 +7,7 @@ class SignalinfosController < ApplicationController
     if @signalinfo.save
       redirect_to car_path(@signalinfo.calculation.car_id)
     else
-      flash[:errors_signalinfo_create] = @signalinfo.errors.full_messages
-      flash[:input_signalinfo_create] = params[:signalinfo]
+      set_signalinfo_error_flash(:create)
       handle_signalinfo_error
     end
   end
@@ -17,8 +16,7 @@ class SignalinfosController < ApplicationController
     if @signalinfo.update(signalinfo_params)
       redirect_to car_path(@signalinfo.calculation.car_id)
     else
-      flash[:errors_signalinfo_update] = @signalinfo.errors.full_messages
-      flash[:input_signalinfo_update] = params[:signalinfo]
+      set_signalinfo_error_flash(:update)
       flash[:signalinfo_error_id] = {
         car_id: @signalinfo.calculation.car_id,
         calculation_id: @signalinfo.calculation.id,
@@ -43,12 +41,15 @@ class SignalinfosController < ApplicationController
     params.require(:signalinfo).permit(:signal_name, :signal_type_id).merge(calculation_id: params[:calculation_id])
   end
 
+  def set_signalinfo_error_flash(action)
+    flash[:"errors_signalinfo_#{action}"] = @signalinfo.errors.full_messages
+    flash[:"input_signalinfo_#{action}"] = params[:signalinfo]
+  end
+
   def handle_signalinfo_error
     @car = Car.find(params[:car_id])
     @calculation = Calculation.new(car_id: @car.id)
     @calculations = @car.calculations.includes(:car)
     redirect_to car_path(@car)
   end
-
-    
 end

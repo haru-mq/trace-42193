@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         render :edit, status: :unprocessable_entity
       end
     else
-      @user.errors.add(:current_password, "Current password is incorrect")
+      @user.errors.add(:current_password, "is incorrect")
       render :edit, status: :unprocessable_entity
     end
   end
