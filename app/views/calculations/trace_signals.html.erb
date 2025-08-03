@@ -10,15 +10,15 @@
       <table>
         <thead>
           <tr>
+            <th>出力元の演算</th>
             <th>信号名</th>
-            <th>信号の種類</th>
           </tr>
         </thead>
         <tbody>
           <% @trace_signals.each do |signal| %>
             <tr>
-              <td><%= signal[:signal_name] %></td>
               <td><%= signal[:source_calculation] %></td>
+              <td><%= signal[:signal_name] %></td>
             </tr>
           <% end %>
         </tbody>

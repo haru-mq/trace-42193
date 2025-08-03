@@ -41,8 +41,8 @@ class SignalTraceService
     {
       results: @trace_signals.map do |s|
         {
-          signal_name: s.signal_name,
-          source_calculation: s.calculation.calculation_name
+          source_calculation: s.calculation.calculation_name,
+          signal_name: s.signal_name
         }
       end,
       loop_limit_exceeded: @loop_limit_exceeded
