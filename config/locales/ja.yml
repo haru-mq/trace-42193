@@ -1,8 +1,0 @@
-ja:
-  date:
-    formats:
-      default: "%Y/%m/%d"
-    order:
-      - :year
-      - :month
-      - :day
