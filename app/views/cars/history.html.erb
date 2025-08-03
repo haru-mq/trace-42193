@@ -20,10 +20,16 @@
                 /<%= h[:user].first_name %><%= h[:user].last_name %></td>
             <td><%= history_event_name(h[:event]) %></td>
             <td><%= history_model_name(h[:model]) %></td>
-            <td>車両：<%= h[:car].car_name %><br/>
-                演算：<%= h[:calculation]&.calculation_name || "-" %><br/>
-                信号：<%= h[:signal_name] || "-" %><br/>
-                信号の種類：<%= h[:signal_type_id]&.name || "-" %></td>
+            <td>
+              車両：<%= h[:car].car_name %><br/>
+              <% if h[:calculation_name].present? %>
+                演算：<%= h[:calculation_name] %><br/>
+              <% end %>
+              <% if h[:signal_name].present? %>
+                信号：<%= h[:signal_name] %><br/>
+                信号の種類：<%= h[:signal_type_id]&.name %><br/>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

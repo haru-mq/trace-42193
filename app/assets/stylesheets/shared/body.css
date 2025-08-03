@@ -158,3 +158,8 @@ a:hover{
   align-items:center;
   margin:0 0 .8rem 0;
 }
+
+.error-messages{
+  color: red;
+  margin-bottom:.8rem;
+}

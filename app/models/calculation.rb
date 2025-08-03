@@ -4,7 +4,7 @@ class Calculation < ApplicationRecord
   has_many :signalinfos, dependent: :destroy
   has_paper_trail on: [:create, :update, :destroy], meta: {
     car_id: :car_id,
-    calculation_id: :id
+    calculation_name: :calculation_name
   }
 
   validates :calculation_name, presence: true,

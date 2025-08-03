@@ -35,7 +35,7 @@ class CreateVersions < ActiveRecord::Migration[7.1]
       t.string   :event,     null: false
 
       t.integer  :car_id
-      t.integer  :calculation_id
+      t.string   :calculation_name
       t.string   :signal_name
       t.integer  :signal_type_id
 

@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_22_104303) do
     t.string "item_type", limit: 191, null: false
     t.string "event", null: false
     t.integer "car_id"
-    t.integer "calculation_id"
+    t.string "calculation_name"
     t.string "signal_name"
     t.integer "signal_type_id"
     t.text "object", size: :long

@@ -5,7 +5,7 @@ class Signalinfo < ApplicationRecord
   belongs_to_active_hash :signal_type
   has_paper_trail on: [:create, :update, :destroy], meta: {
     car_id: :car_id_from_association,
-    calculation_id: :calculation_id,
+    calculation_name: ->(signalinfo) { signalinfo.calculation.calculation_name },
     signal_name: :signal_name,
     signal_type_id: :signal_type_id
   }

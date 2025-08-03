@@ -48,7 +48,7 @@ class CarsController < ApplicationController
         event:  v.event,
         model:  v.item_type,
         car:    Car.find_by(id: v.car_id),
-        calculation:  v.item_type == "Signalinfo" ? Calculation.find_by(id: v.calculation_id) : (v.item_type == "Calculation" ? Calculation.find_by(id: v.calculation_id) : nil),
+        calculation_name:  ["Calculation", "Signalinfo"].include?(v.item_type) ? v.calculation_name : nil,
         signal_name:   v.item_type == "Signalinfo" ? v.signal_name : nil,
         signal_type_id: v.item_type == "Signalinfo" ? SignalType.find_by(id: v.signal_type_id) : nil,
       }
