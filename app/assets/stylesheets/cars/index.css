@@ -6,7 +6,7 @@
   margin: 0 0 15px 0;
 }
 
-/* ----- 車両リスト ----- */
+/* ----- car list ----- */
 .car-list {
   list-style: none;
   padding: 0;
@@ -27,7 +27,7 @@
 }
 
 .car-list__right {
-  width: 140px;
+  width: 180px;
 }
 
 .car-list__right li {

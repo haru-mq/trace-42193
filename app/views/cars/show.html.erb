@@ -8,7 +8,7 @@
 
   <div class="car-list__left">車両名：<%= saved_car %></div>
   <ul class="car-list__right">
-    <li>発売日：<%= saved_launch_date %></li>
+    <li>発売日：<%= saved_launch_date&.strftime("%Y年%m月%d日") || "未定" %></li>
     <li>登録者：<%= saved_user_name %></li>
   </ul>
 </div>
@@ -131,7 +131,7 @@
   </section>
 <% end %>
 
-<%# PopUp============================================================================= %>
+<%# Modal============================================================================= %>
 
 <%# Car Edit Form ------------------------------------------------------%>
 <div class="modal" id="car-form" data-error-messages="<%= @car.errors.any? %>">
@@ -156,7 +156,7 @@
                       id:"launch-date",
                       use_month_numbers: true,
                       prompt:'--',
-                      start_year: 2000,
+                      start_year: 2020,
                       end_year: (Time.now.year + 10),
                       date_separator: '%s'),
                     "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>

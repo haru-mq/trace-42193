@@ -16,10 +16,10 @@
       <tbody>
         <% @history.each do |h| %>
           <tr>
-            <td><%= h[:time].strftime("%m月%d日 %H:%M") %><br/>
+            <td><%= h[:time].strftime("%Y年%m月%d日 %H:%M") %><br/>
                 /<%= h[:user].first_name %><%= h[:user].last_name %></td>
-            <td><%= h[:event] %></td>
-            <td><%= h[:model] %></td>
+            <td><%= history_event_name(h[:event]) %></td>
+            <td><%= history_model_name(h[:model]) %></td>
             <td>車両：<%= h[:car].car_name %><br/>
                 演算：<%= h[:calculation]&.calculation_name || "-" %><br/>
                 信号：<%= h[:signal_name] || "-" %><br/>
