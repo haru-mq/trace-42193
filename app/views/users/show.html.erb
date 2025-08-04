@@ -1,16 +1,14 @@
 <h2 class="page_title">プロフィール</h2>
 
-<div class="profile-wrap">
-  <ul class="profile-list">
-    <li>部署名：<%= @user.department.name %></li>
-    <li>職番：<%= @user.job_num %></li>
-    <li>Email：<%= @user.email %></li>
-    <li>苗字：<%= @user.last_name %></li>
-    <li>名前：<%= @user.first_name %></li>
-    <li>苗字カナ：<%= @user.last_name_kana %></li>
-    <li>名前カナ：<%= @user.first_name_kana %></li>
-  </ul>
+<ul class="profile-list">
+  <li>部署名：<%= @user.department.name %></li>
+  <li>職番：<%= @user.job_num %></li>
+  <li>Email：<%= @user.email %></li>
+  <li>苗字：<%= @user.last_name %></li>
+  <li>名前：<%= @user.first_name %></li>
+  <li>苗字カナ：<%= @user.last_name_kana %></li>
+  <li>名前カナ：<%= @user.first_name_kana %></li>
+</ul>
 
-  <%= link_to "編集", edit_user_path(@user), class:"btn btn--new-edit" %>
-  <%= link_to "戻る", root_path, class:"btn btn--return" %>
-</div>
+<%= link_to "編集", edit_user_path(@user), class:"btn btn--new-edit" %>
+<%= link_to "戻る", root_path, class:"btn btn--return" %>

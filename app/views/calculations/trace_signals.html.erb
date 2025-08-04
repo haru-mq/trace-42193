@@ -1,30 +1,28 @@
 <h2 class="page_title">信号の追跡結果</h2>
 
-<div class="trace-wrap">
-  <h3 class="table-title">演算「<%= @calculation.calculation_name %>」の変更により影響する信号</h3>
+<h3 class="table-title">演算「<%= @calculation.calculation_name %>」の変更により影響する信号</h3>
 
-  <% if @trace_signals.any? %>
-    <% if @loop_limit_exceeded %>
-      <p class="warning"><%= "Signal trace exceeded limit from calculation from #{@calculation.calculation_name}"%></p>
-    <% else %>
-      <table>
-        <thead>
+<% if @trace_signals.any? %>
+  <% if @loop_limit_exceeded %>
+    <p class="warning"><%= "Signal trace exceeded limit from calculation from #{@calculation.calculation_name}"%></p>
+  <% else %>
+    <table>
+      <thead>
+        <tr>
+          <th>出力元の演算</th>
+          <th>信号名</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @trace_signals.each do |signal| %>
           <tr>
-            <th>出力元の演算</th>
-            <th>信号名</th>
+            <td><%= signal[:source_calculation] %></td>
+            <td><%= signal[:signal_name] %></td>
           </tr>
-        </thead>
-        <tbody>
-          <% @trace_signals.each do |signal| %>
-            <tr>
-              <td><%= signal[:source_calculation] %></td>
-              <td><%= signal[:signal_name] %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
+<% end %>
 
-  <%= link_to '戻る', car_path(@calculation.car_id), class: "btn btn--return" %>
-</div>
+<%= link_to '戻る', car_path(@calculation.car_id), class: "btn btn--return" %>

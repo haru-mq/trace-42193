@@ -1,17 +1,17 @@
 <h2 class="page_title">車両一覧</h2>
-  <% if user_signed_in? %>
-    <span class="user-name">こんにちは！<%= current_user.first_name %>さん！</span>
-  <% end %>
+<% if user_signed_in? %>
+  <span class="user-name">こんにちは！<%= current_user.first_name %>さん！</span>
+<% end %>
 
-  <% @cars.each do |car| %>
-    <div class="car-list">
-      <div class="car-list__left">車両名：<%= link_to car.car_name, car_path(car) %></div>
-      <ul class="car-list__right">
-        <li>発売日：<%= car.launch_date&.strftime("%Y年%m月%d日") || "未定" %></li>
-        <li>登録者：<%= car.user.first_name %><%= car.user.last_name %></li>
-      </ul>
-    </div>
-  <% end %>
+<% @cars.each do |car| %>
+  <div class="car-list">
+    <div class="car-list__left">車両名：<%= link_to car.car_name, car_path(car) %></div>
+    <ul class="car-list__right">
+      <li>発売日：<%= car.launch_date&.strftime("%Y年%m月%d日") || "未定" %></li>
+      <li>登録者：<%= car.user.first_name %><%= car.user.last_name %></li>
+    </ul>
+  </div>
+<% end %>
 
 <% if user_signed_in? %>
     <a class="btn btn--primary", id="new-edit-car">新規登録</a>

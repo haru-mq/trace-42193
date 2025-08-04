@@ -1,39 +1,37 @@
 <h2 class="page_title">変更履歴</h2>
 
-<div class="history-wrap">
-  <h3 class="table_title">車両「<%= @car.car_name %>」の変更履歴</h3>
-  <% if @history.any? %>
-    <table class="history-table">
-      <thead>
+<h3 class="table_title">車両「<%= @car.car_name %>」の変更履歴</h3>
+<% if @history.any? %>
+  <table class="history-table">
+    <thead>
+      <tr>
+        <th>日時<br/>
+            /変更者</th>
+        <th>変更</th>
+        <th>変更箇所</th>
+        <th>対象</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @history.each do |h| %>
         <tr>
-          <th>日時<br/>
-              /変更者</th>
-          <th>変更</th>
-          <th>変更箇所</th>
-          <th>対象</th>
+          <td><%= h[:time].strftime("%Y年%m月%d日 %H:%M") %><br/>
+              /<%= h[:user].first_name %><%= h[:user].last_name %></td>
+          <td><%= history_event_name(h[:event]) %></td>
+          <td><%= history_model_name(h[:model]) %></td>
+          <td>
+            車両：<%= h[:car].car_name %><br/>
+            <% if h[:calculation_name].present? %>
+              演算：<%= h[:calculation_name] %><br/>
+            <% end %>
+            <% if h[:signal_name].present? %>
+              信号：<%= h[:signal_name] %><br/>
+              信号の種類：<%= h[:signal_type_id]&.name %><br/>
+            <% end %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @history.each do |h| %>
-          <tr>
-            <td><%= h[:time].strftime("%Y年%m月%d日 %H:%M") %><br/>
-                /<%= h[:user].first_name %><%= h[:user].last_name %></td>
-            <td><%= history_event_name(h[:event]) %></td>
-            <td><%= history_model_name(h[:model]) %></td>
-            <td>
-              車両：<%= h[:car].car_name %><br/>
-              <% if h[:calculation_name].present? %>
-                演算：<%= h[:calculation_name] %><br/>
-              <% end %>
-              <% if h[:signal_name].present? %>
-                信号：<%= h[:signal_name] %><br/>
-                信号の種類：<%= h[:signal_type_id]&.name %><br/>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
-  <%= link_to '戻る', car_path(@car), class: "btn btn--return" %>
-</div>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<%= link_to '戻る', car_path(@car), class: "btn btn--return" %>

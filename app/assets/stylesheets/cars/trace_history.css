@@ -21,17 +21,3 @@ table th {
 table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-
-/* ---------- history ---------- */
-.history-wrap{
-  width:480px;
-  margin:0 auto;
-  padding:1rem 0;
-}
-
-/* ---------- trace---------- */
-.trace-wrap {
-  width: 480px;
-  margin: 0 auto;
-  padding: 1rem 0;
-}

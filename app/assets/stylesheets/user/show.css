@@ -1,9 +1,3 @@
-.profile-wrap{
-  width:480px;
-  margin:0 auto;
-  padding-bottom: 1rem;
-}
-
 /* profile details */
 .profile-list{
   background:#fff;
@@ -16,17 +10,3 @@
   font-size:16px;
   margin-bottom:.4rem;
 }
-
-/* return link */
-.profile-return{
-  display:block;
-  width:480px;
-  max-width:100%;
-  padding:.5rem;
-  text-align:center;
-  background:#4b6584;
-  color:#fff;
-  text-decoration:none;
-  border-radius:6px;
-}
-.profile-return:hover{opacity:.9}

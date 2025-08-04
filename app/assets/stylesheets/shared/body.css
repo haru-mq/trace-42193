@@ -7,9 +7,10 @@ body{
 }
 
 .container{
+  box-sizing: border-box;
   width:480px;
   margin:0 auto;
-  padding:0 1rem;
+  padding:0 1rem 1rem;
 }
 
 .page_title {
