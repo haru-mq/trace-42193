@@ -43,7 +43,7 @@ https://trace-42193.onrender.com/
 ## 実装した機能とGIF
 ### 1. モーダルによる登録・編集
 モーダルで車両/演算/信号の登録や編集を行う  
-*モーダル操作の例：*https://gyazo.com/f6de96b8910f6d779696af593acf24cf
+*モーダル操作の例：* https://gyazo.com/f6de96b8910f6d779696af593acf24cf
 
 ### 2. 変更履歴の確認
 過去の変更履歴を一覧で確認できる  
