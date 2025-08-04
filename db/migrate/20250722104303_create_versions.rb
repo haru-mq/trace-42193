@@ -13,6 +13,17 @@ class CreateVersions < ActiveRecord::Migration[7.1]
       # Consider using bigint type for performance if you are going to store only numeric ids.
       # t.bigint   :whodunnit
       t.string   :whodunnit
+
+      t.bigint   :item_id,   null: false
+      t.string   :item_type, null: false, limit: 191
+
+      t.string   :event,     null: false
+
+      t.integer  :car_id
+      t.string   :calculation_name
+      t.string   :signal_name
+      t.integer  :signal_type_id
+
       # Known issue in MySQL: fractional second precision
       # -------------------------------------------------
       #
@@ -29,15 +40,6 @@ class CreateVersions < ActiveRecord::Migration[7.1]
       # MySQL users should use the following line for `created_at`
       # t.datetime :created_at, limit: 6
       t.datetime :created_at
-
-      t.bigint   :item_id,   null: false
-      t.string   :item_type, null: false, limit: 191
-      t.string   :event,     null: false
-
-      t.integer  :car_id
-      t.string   :calculation_name
-      t.string   :signal_name
-      t.integer  :signal_type_id
 
       t.text     :object, limit: TEXT_BYTES
     end
